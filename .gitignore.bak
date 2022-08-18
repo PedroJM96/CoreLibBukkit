@@ -1,0 +1,8 @@
+# Ignora la carpeta target
+target
+
+# Ignora la carpeta bin
+bin
+
+# Ignora la carpeta .settings
+.settings
