@@ -19,7 +19,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar mensajes ActionBar a los jugadores en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.4 10-07-2021
+ * @version 1.5 18-08-2022
  *
  */
 public class CoreActionBar {
@@ -65,43 +65,16 @@ public class CoreActionBar {
 	
 	
 	public static void sendActionBar(Player player, String message, int duration,Plugin plugin) {
-		//sendActionBar(player, message);
-
-		/*if (duration >= 0) {
-			// Sends empty message at the end of the duration. Allows messages shorter than 3 seconds, ensures precision.
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					sendActionBar(player, "");
-				}
-			}.runTaskLater(plugin, duration + 1);
-		}*/
-
 		if(timers.containsKey(player.getUniqueId())) {
 			cancelTimer(player);
 		}
-		
 		timers.put(player.getUniqueId(), Integer.valueOf(new SendRun(duration,player,message).runTaskTimer(plugin, 0L, 20L).getTaskId()));
-		
-		/*// Re-sends the messages every 3 seconds so it doesn't go away from the player's screen.
-		while (duration > 60) {
-			duration -= 60;
-			int sched = duration % 60;
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					sendActionBar(player, message);
-				}
-			}.runTaskLater(plugin, (long) sched);
-		}*/
 	}
 	
 	public static void sendActionBar(Player player, String message) {
 		if (!player.isOnline()) {
 			return; // Player may have logged out
 		}
-		
-		
 		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_11_x)) {
 			sendPre_1_12(player,CoreColor.colorCodes(message));
 		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_15_x) ){
@@ -110,8 +83,10 @@ public class CoreActionBar {
 			sendPos_1_16_Pre_1_17(player,CoreColor.colorCodes(message));
 		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_17_x) ){
 			sendPos_1_17(player,CoreColor.colorCodes(message));
-		}else {
+		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_18_x) ){
 			sendPos_1_18(player,CoreColor.colorCodes(message));
+		}else {
+			sendPos_1_19(player,CoreColor.colorCodes(message));
 		}
 		
 	}
@@ -133,6 +108,29 @@ public class CoreActionBar {
 	    	Object packet = constructor.newInstance(ationmesage,chatMessageTypeClass.getField("c").get(null),player.getUniqueId()  );
 
 	    	CoreReflection.sendPacketPos_1_18(player, packet);
+	    }
+	    catch (Exception var11)
+	    {
+	      var11.printStackTrace();
+	    }
+	  }
+	
+	private static void sendPos_1_19(Player player, String message)
+	  {
+	    try
+	    
+	    {
+	    	Class<?> chatClass = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent");
+	    	//Class<?> chatSerialiceClass = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent$ChatSerializer");
+	    	
+	    	//Object ationmesage = chatSerialiceClass.getMethod("a",String.class).invoke(new Object[] { "{\"text\": \"" + message + "\"}" });
+	    	Object ationmesage = chatClass.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + message + "\"}" );
+
+	    	Constructor<?> constructor = CoreReflection.getClass("net.minecraft.network.protocol.game.ClientboundSystemChatPacket").getConstructor(chatClass,int.class);
+	    	// c es igual a GAME_INFO
+	    	Object packet = constructor.newInstance(ationmesage,2);
+
+	    	CoreReflection.sendPacketPos_1_19(player, packet);
 	    }
 	    catch (Exception var11)
 	    {
