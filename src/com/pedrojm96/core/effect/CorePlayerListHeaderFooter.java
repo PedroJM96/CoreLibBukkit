@@ -14,7 +14,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar el header y el footer de la lista de jugadores.
  * 
  * @author PedroJM96
- * @version 1.2 02-07-2021
+ * @version 1.3 18-08-2022
  *
  */
 public class CorePlayerListHeaderFooter {
@@ -49,6 +49,7 @@ public class CorePlayerListHeaderFooter {
 		}
 		catch (Exception ex)
 		{
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			ex.printStackTrace();
 		}
 		

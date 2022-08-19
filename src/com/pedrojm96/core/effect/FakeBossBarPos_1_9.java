@@ -12,7 +12,7 @@ import com.pedrojm96.core.effect.CoreBossBar.Style;
  * Objeto que contiene los metodos del falso BossBar en la versiones superiores a la 1.9 y menores a la 1.17 del servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.0 02-07-2021
+ * @version 1.1 19-08-2022
  *
  */
 public class FakeBossBarPos_1_9 implements FakeBossBar{
@@ -119,6 +119,7 @@ public class FakeBossBarPos_1_9 implements FakeBossBar{
 	        cField.setAccessible(true);
 	        cField.set(PacketPlayOutBoss, ChatSerializerClass.getMethod("a", new Class[] { String.class }).invoke(null, new Object[] { "{\"text\": \"" + this.name + "\"}" }));
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		
@@ -135,6 +136,7 @@ public class FakeBossBarPos_1_9 implements FakeBossBar{
 			CoreReflection.sendPacket(player, PacketPlayOutBoss);
 			this.send = false;
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		
@@ -153,6 +155,7 @@ public class FakeBossBarPos_1_9 implements FakeBossBar{
 			CoreReflection.sendPacket(player, PacketPlayOutBoss);
 			this.send = true;
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		
@@ -174,7 +177,8 @@ public class FakeBossBarPos_1_9 implements FakeBossBar{
 			
 			
 		}catch (Exception e) {
-				e.printStackTrace();
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
+			e.printStackTrace();
 		}
 	}
 
@@ -192,6 +196,7 @@ public class FakeBossBarPos_1_9 implements FakeBossBar{
 				     dField.setAccessible(true);
 				     dField.set(PacketPlayOutBoss, Float.valueOf(this.progress)); //Pro
 		      	}catch (Exception e) {
+		      		System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 					e.printStackTrace();
 		      	}
 	      	}

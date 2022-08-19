@@ -10,7 +10,7 @@ import com.pedrojm96.core.CoreReflection;
  * Contiene los metodos para ocultar y mostrar a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.0 15-02-2019
+ * @version 1.1 19-08-2022
  *
  */
 public class CoreShowHidePlayer {
@@ -40,6 +40,7 @@ public class CoreShowHidePlayer {
 		}
 	    catch (Exception var11)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	var11.printStackTrace();
 	    }
 	}
@@ -65,6 +66,7 @@ public class CoreShowHidePlayer {
 		}
 	    catch (Exception var11)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	var11.printStackTrace();
 	    }
 	}
@@ -89,6 +91,7 @@ public class CoreShowHidePlayer {
 		}
 	    catch (Exception var11)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	var11.printStackTrace();
 	    }
 	}
@@ -109,6 +112,7 @@ public class CoreShowHidePlayer {
 		}
 	    catch (Exception var11)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	var11.printStackTrace();
 	    }
 	}

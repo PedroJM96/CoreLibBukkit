@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
  * Contiene los metodos estaticos para acceder y manejar  la reflesion de clases de minecraft.net y craftbukkit.
  * 
  * @author PedroJM96
- * @version 1.2 10-07-2021
+ * @version 1.3 19-08-2022
  *
  */
 public class CoreReflection {
@@ -82,6 +82,7 @@ public class CoreReflection {
 	    }
 	    catch (Exception e)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      e.printStackTrace();
 	    }
 	}
@@ -109,6 +110,7 @@ public class CoreReflection {
 	    }
 	    catch (Exception e)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      e.printStackTrace();
 	    }
 	}
@@ -136,6 +138,7 @@ public class CoreReflection {
 	    }
 	    catch (Exception e)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      e.printStackTrace();
 	    }
 	}
@@ -159,6 +162,7 @@ public class CoreReflection {
 	    }
 	    catch (Exception e)
 	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      e.printStackTrace();
 	    }
 	}
@@ -171,8 +175,10 @@ public class CoreReflection {
         try{
             f = c.getDeclaredField(name);
         } catch(NoSuchFieldException e){
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         } catch(SecurityException e){
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
         if(f == null){
@@ -186,14 +192,17 @@ public class CoreReflection {
             modifiersField.setInt(f, modifiersField.getInt(f) - Modifier.FINAL);
         } catch(SecurityException e){
             System.out.println("A security manager may be preventing you from setting this field.");
+            System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         } catch(IllegalAccessException | IllegalArgumentException | NoSuchFieldException e){
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
        
         try {
         	retorno = f.get(null);
         } catch (IllegalArgumentException | IllegalAccessException e) {
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
         return retorno;
@@ -241,8 +250,10 @@ public class CoreReflection {
         try{
             f = c.getDeclaredField(name);
         } catch(NoSuchFieldException e){
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         } catch(SecurityException e){
+        	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
         if(f == null){
@@ -256,6 +267,7 @@ public class CoreReflection {
             modifiersField.setInt(f, modifiersField.getInt(f) - Modifier.FINAL);
         } catch(SecurityException e){
             System.out.println("A security manager may be preventing you from setting this field.");
+            System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         } catch(IllegalAccessException | IllegalArgumentException | NoSuchFieldException e){
             e.printStackTrace();
@@ -293,6 +305,7 @@ public class CoreReflection {
 	      return Class.forName(name);
 	    }
 	    catch (ClassNotFoundException e) {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	 e.printStackTrace();
 	    }
 	    return null;

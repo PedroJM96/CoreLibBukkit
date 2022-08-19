@@ -12,7 +12,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar titulos y sutitulos a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.2 01-07-2021
+ * @version 1.3 19-08-2022
  *
  */
 public class CoreTitles {
@@ -81,6 +81,7 @@ public class CoreTitles {
 	      	CoreReflection.sendPacket(player, subtitlePacket);
 	    }
 	    catch (Exception var11){
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	    	var11.printStackTrace();
 	    }
 	}

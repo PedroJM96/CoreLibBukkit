@@ -23,7 +23,7 @@ import io.netty.buffer.Unpooled;
  * Contiene los metodos para enviar libros escritos  a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.0 18-07-2021
+ * @version 1.1 19-08-2022
  *
  */
 public class CoreWrittenBooks {
@@ -67,6 +67,7 @@ public class CoreWrittenBooks {
 	        CoreReflection.sendPacket(player, packet);
 	        
 	    } catch (Exception e) {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      e.printStackTrace();
 	    } 
 	    

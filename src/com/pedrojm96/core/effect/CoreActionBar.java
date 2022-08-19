@@ -19,7 +19,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar mensajes ActionBar a los jugadores en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.5 18-08-2022
+ * @version 1.6 19-08-2022
  *
  */
 public class CoreActionBar {
@@ -111,6 +111,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }
@@ -134,6 +135,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }
@@ -158,6 +160,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }
@@ -183,6 +186,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }
@@ -208,6 +212,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }
@@ -230,6 +235,7 @@ public class CoreActionBar {
 	    }
 	    catch (Exception var11)
 	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 	      var11.printStackTrace();
 	    }
 	  }

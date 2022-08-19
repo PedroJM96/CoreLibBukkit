@@ -16,7 +16,7 @@ import com.pedrojm96.core.CoreReflection;
  * Objeto que contiene los metodos del falso BossBar en las versionnes iguales o inferiores a 1.8.8 del servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.0 02-07-2021
+ * @version 1.1 19-08-2022
  *
  */
 public class FakeBossBarPre1_9 implements FakeBossBar{
@@ -51,6 +51,7 @@ public class FakeBossBarPre1_9 implements FakeBossBar{
 		try {
 			createDragon();
 		} catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 	}
@@ -108,6 +109,7 @@ public class FakeBossBarPre1_9 implements FakeBossBar{
 		try {
 			this.name = paramString;
 		} catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		
@@ -125,6 +127,7 @@ public class FakeBossBarPre1_9 implements FakeBossBar{
 			CoreReflection.sendPacket(player, packet);
 			this.send = false;
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		 
@@ -137,6 +140,7 @@ public class FakeBossBarPre1_9 implements FakeBossBar{
 			teleport();
 			this.send = true;
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		 
@@ -186,6 +190,7 @@ public class FakeBossBarPre1_9 implements FakeBossBar{
 			a.invoke(watcher, 20, new Integer(1000));
 			
 		}catch (Exception e) {
+			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		return watcher;

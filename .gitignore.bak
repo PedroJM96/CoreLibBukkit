@@ -6,3 +6,15 @@ bin
 
 # Ignora la carpeta .settings
 .settings
+
+# Ignora el archivo .classpath
+.classpath
+
+# Ignora el archivo .project
+.project
+
+# Ignora la carpeta .git
+.git
+
+# Ignora todos los archivos bak
+*.bak

@@ -15,6 +15,15 @@ import com.mojang.authlib.GameProfile;
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreReflection;
 
+
+
+/**
+ * Contiene los metodos para cambiar el motd servidor de minecraft implementando la api de bukkt/spigot.
+ * 
+ * @author PedroJM96
+ * @version 1.1 19-08-2022
+ *
+ */
 public class CoreServerPingInfo {
 
 	public static class PingMotd{
@@ -196,6 +205,7 @@ public class CoreServerPingInfo {
 				change = true;
 
 				}catch (Exception var11){
+					System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			    	var11.printStackTrace();
 			    }
 		}
@@ -255,6 +265,7 @@ public class CoreServerPingInfo {
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 					| NoSuchMethodException | SecurityException e) {
 				// TODO Auto-generated catch block
+				System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 				e.printStackTrace();
 			}
 			return json;

@@ -47,6 +47,7 @@ public class CoreConfig {
 			Validate.notNull(dafaultData);
 		}catch (IllegalArgumentException e) {
 			log.fatalError("Error on create Object CoreConfig");
+			log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 			plugin.getServer().getPluginManager().disablePlugin(plugin);
 		}
@@ -70,6 +71,7 @@ public class CoreConfig {
 				defaultConfig.loadFromString(utf8EncodedString);
 			} catch (InvalidConfigurationException e) {
 				log.fatalError("Error on loaded default config for "+this.configFileName+".yml.");
+				log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 				e.printStackTrace();
 				plugin.getServer().getPluginManager().disablePlugin(plugin);
 			}
@@ -119,6 +121,7 @@ public class CoreConfig {
 			result = CharStreams.toString(new InputStreamReader(
 				     dataIn, Charset.forName("UTF-8")));
 		} catch (IOException e) {
+			log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 		return result;
@@ -159,6 +162,7 @@ public class CoreConfig {
         }
         catch(IOException e){
         	log.fatalError("Error on save "+this.configFileName+".yml.");
+        	log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
         	e.printStackTrace();
         }
 	}
@@ -187,6 +191,7 @@ public class CoreConfig {
         }
         catch(IOException e){
         	log.fatalError("Error on save "+this.configFileName+".yml.");
+        	log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
         	e.printStackTrace();
         }
     }
@@ -198,6 +203,7 @@ public class CoreConfig {
 			log.alert(this.configFileName+".yml loaded.");
 		} catch (IOException | InvalidConfigurationException e) {
 			log.fatalError("Error on loaded "+this.configFileName+".yml.");
+			log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
 	}
@@ -208,6 +214,7 @@ public class CoreConfig {
 			return this;
 		} catch (InvalidConfigurationException e) {
 			log.fatalError("Error on loaded Master "+this.configFileName);
+			log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 			return null;
 		}
@@ -241,6 +248,7 @@ public class CoreConfig {
         }
         catch(IOException e){
         	log.fatalError("Error on create "+this.configFileName+".yml.");
+        	log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
     }
@@ -259,6 +267,7 @@ public class CoreConfig {
         }
         catch(IOException e){
         	log.fatalError("Error on create "+this.configFileName+".yml."); 
+        	log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
         	e.printStackTrace();
         }
     }
