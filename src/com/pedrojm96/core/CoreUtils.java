@@ -32,7 +32,7 @@ import com.mojang.authlib.properties.Property;
  * Utilidades para el core.
  * 
  * @author PedroJM96
- * @version 1.6 04-11-2020
+ * @version 1.7 22-08-2022
  *
  */
 public class CoreUtils {
@@ -92,6 +92,8 @@ public class CoreUtils {
 		v1_18_2(11802),
 		v1_18_x(11810),
 		v1_19(11900),
+		v1_19_1(11901),
+		v1_19_2(11902),
 		v1_19_x(11910),
 		vUnsupported(1000000);
 		

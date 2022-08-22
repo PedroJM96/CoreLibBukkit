@@ -19,7 +19,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar mensajes ActionBar a los jugadores en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.6 19-08-2022
+ * @version 1.7 22-08-2022
  *
  */
 public class CoreActionBar {
@@ -85,8 +85,10 @@ public class CoreActionBar {
 			sendPos_1_17(player,CoreColor.colorCodes(message));
 		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_18_x) ){
 			sendPos_1_18(player,CoreColor.colorCodes(message));
-		}else {
+		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_19) ){
 			sendPos_1_19(player,CoreColor.colorCodes(message));
+		}else {
+			sendPos_1_19_2(player,CoreColor.colorCodes(message));
 		}
 		
 	}
@@ -130,6 +132,31 @@ public class CoreActionBar {
 	    	Constructor<?> constructor = CoreReflection.getClass("net.minecraft.network.protocol.game.ClientboundSystemChatPacket").getConstructor(chatClass,int.class);
 	    	// c es igual a GAME_INFO
 	    	Object packet = constructor.newInstance(ationmesage,2);
+
+	    	CoreReflection.sendPacketPos_1_19(player, packet);
+	    }
+	    catch (Exception var11)
+	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
+	      var11.printStackTrace();
+	    }
+	  }
+	
+	
+	private static void sendPos_1_19_2(Player player, String message)
+	  {
+	    try
+	    
+	    {
+	    	Class<?> chatClass = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent");
+	    	//Class<?> chatSerialiceClass = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent$ChatSerializer");
+	    	
+	    	//Object ationmesage = chatSerialiceClass.getMethod("a",String.class).invoke(new Object[] { "{\"text\": \"" + message + "\"}" });
+	    	Object ationmesage = chatClass.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + message + "\"}" );
+
+	    	Constructor<?> constructor = CoreReflection.getClass("net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket").getConstructor(chatClass);
+	    	// c es igual a GAME_INFO
+	    	Object packet = constructor.newInstance(ationmesage);
 
 	    	CoreReflection.sendPacketPos_1_19(player, packet);
 	    }
