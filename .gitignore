@@ -5,13 +5,22 @@ target
 bin
 
 # Ignora la carpeta .settings
-.settings
+**.settings
 
 # Ignora el archivo .classpath
-.classpath
+**/.classpath
+
+# Ignora el archivo todo.txt
+**todo.txt
+
+# Ignora el archivo dependency-reduced-pom.xml
+**/dependency-reduced-pom.xml
 
 # Ignora el archivo .project
-.project
+**/.project
 
 # Ignora todos los archivos bak
 *.bak
+
+# Ignora todos los archivos jarinjar
+**superstats-plugin.jarinjar
