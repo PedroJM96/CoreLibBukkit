@@ -1,4 +1,4 @@
-package com.pedrojm96.core;
+package com.pedrojm96.core.libraryloader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -50,6 +50,11 @@ public class MavenArtifact {
 	    repo = String.valueOf(repo) + "%s/%s/%s/%s-%s.jar";
 	    String url = String.format(repo, new Object[] { this.groupId.replace(".", "/"), this.artifactId, this.version, this.artifactId, this.version });
 	    return new URL(url);
+	  }
+	  
+	  public String getPath() {
+		    String path = this.groupId.replace('.', '/') + '/' + this.artifactId + '/' + this.version + '/' + this.artifactId + '-' + this.version; 
+		    return path;
 	  }
 	  
 	  public void setRepo(String repo) {
