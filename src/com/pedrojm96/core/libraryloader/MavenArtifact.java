@@ -53,7 +53,7 @@ public class MavenArtifact {
 	  }
 	  
 	  public String getPath() {
-		    String path = this.groupId.replace('.', '/') + '/' + this.artifactId + '/' + this.version + '/' + this.artifactId + '-' + this.version; 
+		    String path = this.groupId.replace('.', '/') + '/' + this.artifactId + '/' + this.version + '/' + this.artifactId + '-' + this.version+".jar"; 
 		    return path;
 	  }
 	  

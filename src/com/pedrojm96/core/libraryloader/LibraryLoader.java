@@ -3,7 +3,6 @@ package com.pedrojm96.core.libraryloader;
 import static java.util.Objects.requireNonNull;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,11 +52,11 @@ public class LibraryLoader {
 	    saveDirectory = requireNonNull(dataDirectory, "dataDirectory").toAbsolutePath().resolve("libs");
 	  }
 	  
-	  public void loadLib(File jarsDir, String groupId, String artifactId, String version) throws IOException {
-	    loadLib(jarsDir, groupId, artifactId, version, "https://repo1.maven.org/maven2");
+	  public void loadLib(String groupId, String artifactId, String version) throws IOException {
+	    loadLib(groupId, artifactId, version, "https://repo1.maven.org/maven2");
 	  }
 	  
-	  public void loadLib(File jarsDir, String groupId, String artifactId, String version, String url) throws IOException {
+	  public void loadLib(String groupId, String artifactId, String version, String url) throws IOException {
 	    loadLib(new MavenArtifact(groupId, artifactId, version, url));
 	  }
 	  
@@ -159,13 +158,13 @@ public class LibraryLoader {
 	            throw new IllegalArgumentException(e);
 	        } catch (IOException e) {
 	            if (e instanceof FileNotFoundException) {
-	                log.debug("File not found: " + url);
+	                log.error("File not found: " + url);
 	            } else if (e instanceof SocketTimeoutException) {
-	                log.debug("Connect timed out: " + url);
+	                log.error("Connect timed out: " + url);
 	            } else if (e instanceof UnknownHostException) {
-	                log.debug("Unknown host: " + url);
+	                log.error("Unknown host: " + url);
 	            } else {
-	                log.debug("Unexpected IOException", e);
+	                log.error("Unexpected IOException", e);
 	            }
 
 	            return null;
