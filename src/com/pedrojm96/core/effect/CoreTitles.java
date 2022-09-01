@@ -12,7 +12,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar titulos y sutitulos a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.3 19-08-2022
+ * @version 1.4 1-09-2022
  *
  */
 public class CoreTitles {
@@ -23,7 +23,7 @@ public class CoreTitles {
 	 */
 	public static void sendTitles(Player player, String title)
 	{
-		send(player, 20 , 50 ,10 , CoreColor.colorCodes(title), " ");
+		sendTitles(player, 20 , 50 ,10 , CoreColor.colorCodes(title), " ");
 	}
 	/**
 	 * 
@@ -33,7 +33,7 @@ public class CoreTitles {
 	 */
 	public static void sendTitles(Player player, String title, String subtitle)
 	{
-		send(player, 20 , 50 ,10 , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));
+		sendTitles(player, 20 , 50 ,10 , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));
 	}
 	/**
 	 * 
@@ -44,7 +44,7 @@ public class CoreTitles {
 	 */
 	public static void sendTitles(Player player, Integer stay, String title, String subtitle)
 	{
-		send(player, 20 , stay <= 0 ? 50 : stay ,10 , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));
+		sendTitles(player, 20 , stay <= 0 ? 50 : stay ,10 , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));
 	}
 	/**
 	 * 
@@ -63,6 +63,30 @@ public class CoreTitles {
 			send(player, fadeIn <= 0 ? 20 : fadeIn , stay <= 0 ? 50 : stay ,fadeOut <= 0 ? 10 : fadeOut , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));
 		}	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
