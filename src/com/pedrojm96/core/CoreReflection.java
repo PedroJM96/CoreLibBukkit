@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
  * Contiene los metodos estaticos para acceder y manejar  la reflesion de clases de minecraft.net y craftbukkit.
  * 
  * @author PedroJM96
- * @version 1.3 19-08-2022
+ * @version 1.4 5-09-2022
  *
  */
 public class CoreReflection {
@@ -23,7 +23,6 @@ public class CoreReflection {
 	public static Class<?> getNMSClass(String name)
 	{
 		String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-		
 	    return getClass("net.minecraft.server." + version + "." + name);
 	  
 	}
@@ -36,7 +35,6 @@ public class CoreReflection {
 	public static Class<?> getNMSClassArray(String name)
 	{
 		String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-	   
 	    return getClass("[Lnet.minecraft.server." + version + "." + name+";");
 	   
 	}
@@ -61,8 +59,6 @@ public class CoreReflection {
 	{
 	    return getClass("org.bukkit." + name);
 	}
-	
-	
 	/**
 	 *  Envia un paquete al jugador indigado.
 	 *  
@@ -73,10 +69,7 @@ public class CoreReflection {
 	{
 	    try
 	    {
-	    
-	    	
 	      Object handle = player.getClass().getMethod("getHandle").invoke(player);
-
 	      Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
 	      playerConnection.getClass().getMethod("sendPacket", getNMSClass("Packet") ).invoke(playerConnection, packet );
 	    }
@@ -94,18 +87,13 @@ public class CoreReflection {
 	 * @param player El jugador al que se le va a enviar el paquete.
 	 * @param packet El paquete que se va a enviar.
 	 */
-	public static void sendPacketPos_1_17(Player player, Object packet)
+	public static void sendPacketPos_1_17_Pre_1_18(Player player, Object packet)
 	{
 	    try
 	    {
-	    
 	      Object handle = player.getClass().getMethod("getHandle").invoke(player);
-
 	      Object playerConnection = handle.getClass().getField("b").get(handle);
-	      
 	      Object networkManager = playerConnection.getClass().getField("a").get(playerConnection);
-	      
-	      
 	      networkManager.getClass().getMethod("sendPacket", getClass("net.minecraft.network.protocol.Packet") ).invoke(networkManager, packet );
 	    }
 	    catch (Exception e)
@@ -114,26 +102,19 @@ public class CoreReflection {
 	      e.printStackTrace();
 	    }
 	}
-	
 	/**
 	 *  Envia un paquete al jugador indigado.
 	 *  
 	 * @param player El jugador al que se le va a enviar el paquete.
 	 * @param packet El paquete que se va a enviar.
 	 */
-	public static void sendPacketPos_1_18(Player player, Object packet)
+	public static void sendPacketPos_1_18_Pre_1_19(Player player, Object packet)
 	{
 	    try
 	    {
-	    
-	    	
 	      Object handle = player.getClass().getMethod("getHandle").invoke(player);
-
 	      Object playerConnection = handle.getClass().getField("b").get(handle);
-	      
 	      Object networkManager = playerConnection.getClass().getField("a").get(playerConnection);
-	      
-	      
 	      networkManager.getClass().getMethod("a", getClass("net.minecraft.network.protocol.Packet") ).invoke(networkManager, packet );
 	    }
 	    catch (Exception e)
@@ -142,7 +123,6 @@ public class CoreReflection {
 	      e.printStackTrace();
 	    }
 	}
-	
 	/**
 	 *  Envia un paquete al jugador indigado.
 	 *  
@@ -153,24 +133,20 @@ public class CoreReflection {
 	{
 	    try
 	    {
-	    
 	      Object handle = player.getClass().getMethod("getHandle").invoke(player);
-
 	      Object playerConnection = handle.getClass().getField("b").get(handle);
-	      
 	      playerConnection.getClass().getMethod("a", getClass("net.minecraft.network.protocol.Packet")).invoke(playerConnection, packet );
 	    }
 	    catch (Exception e)
 	    {
 	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
-	      e.printStackTrace();
+	    	e.printStackTrace();
 	    }
 	}
 	
 	
 	public static Object  getStaticField(Class<?> c, String name){
 		Object retorno = null;
-		
 		Field f = null;
         try{
             f = c.getDeclaredField(name);
@@ -198,7 +174,6 @@ public class CoreReflection {
         	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
             e.printStackTrace();
         }
-       
         try {
         	retorno = f.get(null);
         } catch (IllegalArgumentException | IllegalAccessException e) {
@@ -244,7 +219,6 @@ public class CoreReflection {
          catch(Exception e){}
 	}
 	
-	
 	public static void setStaticField(Class<?> c, String name, Object set){
         Field f = null;
         try{
@@ -260,7 +234,6 @@ public class CoreReflection {
             throw new IllegalArgumentException("Error while getting the field '" + name + "'");
         }
         f.setAccessible(true);
-       
         try{
             Field modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
@@ -271,15 +244,13 @@ public class CoreReflection {
             e.printStackTrace();
         } catch(IllegalAccessException | IllegalArgumentException | NoSuchFieldException e){
             e.printStackTrace();
-        }
-       
+        }       
         try {
             f.set(null, set);
         } catch (IllegalArgumentException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
-	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static Enum<?> getEnum(String enumFullName)
@@ -289,10 +260,7 @@ public class CoreReflection {
 	    {
 	      String enumClassName = x[0];
 	      String enumName = x[1];
-	      
-	      
 		  Class<Enum> cl = (Class<Enum>) getClass(enumClassName);
-	      
 	      return Enum.valueOf(cl, enumName);
 	    }
 	    return null;
@@ -309,6 +277,5 @@ public class CoreReflection {
 	    	 e.printStackTrace();
 	    }
 	    return null;
-	  }	 	
-	 
+	  }	 	 
 }

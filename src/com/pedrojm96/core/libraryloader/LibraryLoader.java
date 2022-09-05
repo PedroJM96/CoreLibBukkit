@@ -19,8 +19,6 @@ import com.pedrojm96.core.CoreLog;
 import com.pedrojm96.core.CorePlugin;
 
 
-
-
 /**
  * Para cargar librerias en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
@@ -29,19 +27,14 @@ import com.pedrojm96.core.CorePlugin;
  *
  */
 public class LibraryLoader {
-	  
 	/**
      * User agent string to use when downloading libraries
      */
       public static final String HTTP_USER_AGENT = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2";  
-	
 	  private CoreLog log;
-	  
 	  private Path saveDirectory;
-	  
 	  private CoreURLClassLoaderHelper classLoader;
-	  
-	  
+
 	  public LibraryLoader(CoreURLClassLoaderHelper classLoader, CoreLog log,CorePlugin plugin) {
 		  this(classLoader,log, plugin.getInstance().getDataFolder().toPath());
 	  }
@@ -68,8 +61,6 @@ public class LibraryLoader {
 		  this.log.info(name+" library loaded successfully.");
 	  } 
 	  
-	  
-	  
 	  /**
 	     * Downloads a library jar to the save directory if it doesn't already
 	     * exist and returns the local file path.
@@ -94,18 +85,14 @@ public class LibraryLoader {
 	     */
 	    public Path downloadLibrary(MavenArtifact library,String name) {
 	        Path file = saveDirectory.resolve(requireNonNull(library, "library").getPath());
-
 	        if (Files.exists(file)) {
 	        	log.info("Loading library " + name);
 	        	return file;
 	        }
-	        
 	        Path out = file.resolveSibling(file.getFileName() + ".tmp");
 	        out.toFile().deleteOnExit();
-
 	        try {
 	            Files.createDirectories(file.getParent());
-
                 byte[] bytes = downloadLibrary(library.getUrl(),name);
                 if (bytes == null) {
                 	throw new RuntimeException("Failed to download library '" + name + "'");
@@ -121,11 +108,7 @@ public class LibraryLoader {
 	            } catch (IOException ignored) {
 	            }
 	        }
-	    }
-	  
-	  
-	  
-	  
+	  }
 	  /**
 	     * Downloads a library jar and returns the contents as a byte array.
 	     *
@@ -169,10 +152,5 @@ public class LibraryLoader {
 
 	            return null;
 	        }
-	    }
-	  
-	  
-	  
-	  
+	    } 
 	}
-

@@ -21,15 +21,12 @@ import com.pedrojm96.core.command.CoreExecuteComands;
  * Contiene los metodos para codificar item en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.4 06-02-2019
+ * @version 1.5 05-09-2022
  *
  */
 public class CoreItem {
-
-
-	 private Material material;
 	 
-	
+	private Material material;
 	 private Short data = null;
 	 private String name = null;
 	 private String permission = null;
@@ -89,7 +86,6 @@ public class CoreItem {
 			 }
 		 }   
 	 }
-	 
 	 
 	 public String getNoVersionMessage()
 	 {
@@ -172,7 +168,7 @@ public class CoreItem {
 		 }
 	 }
 	 
-	 @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public boolean like(ItemStack s,Player player)
 	 {
 		 if (s == null) {
@@ -185,47 +181,36 @@ public class CoreItem {
 		 if (this.name == null && meta.hasDisplayName()){
 			 return false; 
 		 }  
-		 
 		 if (this.name != null && !meta.hasDisplayName()) {
 			 return false;
 		 } 
-		 
 		 if (!meta.getDisplayName().equals(CoreVariables.replace(this.name, player))) {
 			 return false;
 		 }
-		 
 		 if ((this.data != null) && (this.data.shortValue() != s.getDurability())) {
 			 return false;
 		 }
 		 return true;
 	 }
 
-	 
 	public void give(Player player,CorePlugin plugin)
 	 {
 		 CoreItemMaker itemmaker = new CoreItemMaker(this.material,slot,enchant_glow,player,plugin);
 		 itemmaker.setSkull(skull);
 		 itemmaker.setData(this.data);
-		 
-		 
 		 if (this.name != null) {
 			 itemmaker.setDisplayName(CoreVariables.replace(this.name, player));
 		 }
-		 
 		 if (this.lore != null) {
 			 itemmaker.setLore(CoreVariables.replaceList(this.lore, player));
 		 }
-		 
 		 ItemStack item = itemmaker.getItemStack();
-		 //item = CoreNBTAttribute.removeAttributesPotion(item);
 		 this.material = item.getType();
-		 
 		 if(enchant_glow) {
 			 item = CoreNBTAttribute.addGlow(item);
 		 }else {
 			 item = CoreNBTAttribute.removeAllAttributes(item);
 		 }
-		 
 		 player.getInventory().setItem(slot, item);
 	 }
 
@@ -233,7 +218,6 @@ public class CoreItem {
 	  {
 	    if ((this.commands != null) && (this.commands.size() > 0))
 	    {
-	    	
 	    	if(this.delay == -1){
 	    		for(String ss : this.commands){
 	    			CoreExecuteComands c = new CoreExecuteComands(s,ss,plugin.getInstance(),prefix);
@@ -241,7 +225,6 @@ public class CoreItem {
 	    		}
 	    	}else{
 	    		if(!cooldown.containsKey(s.getName())){
-		    		//l = addCooldown(s)
 		    	  long t = System.currentTimeMillis();
 		    	  cooldown.put(s.getName(), t);
 		    	  for(String ss : this.commands){
@@ -270,8 +253,8 @@ public class CoreItem {
 		    	}
 	    	}
 	    	
-	    }
-	  }
+	     }
+	 }
 	 
 	 public boolean hasPerm(Player s)
 	 {
@@ -289,10 +272,10 @@ public class CoreItem {
 			 return;
 		 }
 		 this.data = s;
-	  }
+	 }
 	 
-	  public void setCommands(List<String> c)
-	  {
+	 public void setCommands(List<String> c)
+	 {
 		  if ((c == null) || (c.size() == 0))
 		  {
 			  this.commands = null;
@@ -303,5 +286,5 @@ public class CoreItem {
 		  {
 		      this.commands.add(s);
 		  }
-	  }
+	 }
 }

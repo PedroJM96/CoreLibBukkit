@@ -4,9 +4,15 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 
+/**
+ * Para cargar las clases clas loader del plugins.
+ *
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ * 
+ */
 public class CoreURLClassLoader implements CoreURLClassLoaderHelper{
 	private final CoreClassLoader classLoader;
-
     public CoreURLClassLoader(ClassLoader classLoader) {
         if (!(classLoader instanceof CoreClassLoader)) {
             throw new IllegalArgumentException("Loader is not a CoreClassLoader: " + classLoader.getClass().getName());

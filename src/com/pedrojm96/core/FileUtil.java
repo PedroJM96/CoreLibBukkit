@@ -3,20 +3,30 @@ package com.pedrojm96.core;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.bukkit.Bukkit;
 
 
-
+/**
+ * Utilidades de archivos para el core.
+ * 
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ *
+ */
 public class FileUtil {
 	 
-	 @SuppressWarnings({ "rawtypes", "resource" })
+	 	@SuppressWarnings({ "rawtypes", "resource" })
 		public static void extractFolder(String zipFile,String extractFolder) 
 		{
 		    try
@@ -92,17 +102,17 @@ public class FileUtil {
 		    }
 		}
 	 
-/*	 public static void zipFolder(final File folder, final File zipFile) throws IOException {
+	 public static void zipFolder(final File folder, final File zipFile) throws IOException {
 	        zipFolder(folder, new FileOutputStream(zipFile));
-	    }*/
+	    }
 
-	   /* public static void zipFolder(final File folder, final OutputStream outputStream) throws IOException {
+	    public static void zipFolder(final File folder, final OutputStream outputStream) throws IOException {
 	        try (ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream)) {
 	            processFolder(folder, zipOutputStream, folder.getPath().length() + 1);
 	        }
-	    }*/
+	    }
 
-	   /* private static void processFolder(final File folder, final ZipOutputStream zipOutputStream, final int prefixLength)
+	   private static void processFolder(final File folder, final ZipOutputStream zipOutputStream, final int prefixLength)
 	            throws IOException {
 	        for (final File file : folder.listFiles()) {
 	            if (file.isFile()) {
@@ -116,5 +126,5 @@ public class FileUtil {
 	                processFolder(file, zipOutputStream, prefixLength);
 	            }
 	        }
-	    }*/
+	    }
 }

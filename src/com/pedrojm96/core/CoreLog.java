@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Contiene los metodos para enviar mensajes en consola en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.3 25-11-2018
+ * @version 1.4 5-9-2022
  *
  */
 public class CoreLog {
@@ -25,19 +25,19 @@ public class CoreLog {
 			return this.color;
 		}
 	}
+	
 	private JavaPlugin plugin;
 	private Color color;
 	private String prefix;
 	private boolean debug = false;
+	
 	public CoreLog(JavaPlugin plugin,Color color,boolean debug) {
-		
 		this.plugin = plugin;
 		this.color = color;
 		this.prefix = this.color.get()+ "["+Color.GRAY.get()+this.plugin.getName()+this.color.get()+"]";
 		this.debug = debug;
-		
-		
 	}
+	
 	public CoreLog(JavaPlugin plugin,Color color) {
 		this.plugin = plugin;
 		this.color = color;
@@ -47,7 +47,6 @@ public class CoreLog {
 	public void seDebug(boolean debug) {
 		this.debug = debug;
 	}
-	
 	
 	public void info(String info)
 	{
@@ -73,14 +72,12 @@ public class CoreLog {
 	public void error(String info)
 	{
 		this.plugin.getServer().getConsoleSender().sendMessage(prefix+CoreColor.colorCodes("&c " + info));
-		
 	}
 	
 	public void error(String info,Exception e)
 	{
 		this.plugin.getServer().getConsoleSender().sendMessage(prefix+CoreColor.colorCodes("&c " + info));
 		e.printStackTrace();
-		
 	}
 	
 	public void debug(String info)
@@ -104,11 +101,11 @@ public class CoreLog {
 	{
 		System.out.print(string);
 	}
+	
 	public void debug(String info, Exception e) {
 		if(debug) {
 			this.plugin.getServer().getConsoleSender().sendMessage(prefix+CoreColor.colorCodes("&8Debug:&c " + info));
 			e.printStackTrace();
 		}
-		
 	}
 }

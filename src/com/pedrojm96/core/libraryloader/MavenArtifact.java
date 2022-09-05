@@ -3,6 +3,14 @@ package com.pedrojm96.core.libraryloader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+/**
+ * Para manejar las dependencias de las librerias.
+ *
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ * 
+ */
 public class MavenArtifact {
 	  public String groupId;
 	  

@@ -25,7 +25,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
  * Contiene los metodos para codificar diferentes tipos de comandos en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.3 23-12-2019
+ * @version 1.4 05-09-2022
  *
  */
 public class CoreExecuteComands {
@@ -35,7 +35,7 @@ public class CoreExecuteComands {
 	}
 	
 	private class GiveItem {
-		
+
 		private String ma;
 		private Short da;
 		private int ca;
@@ -43,19 +43,15 @@ public class CoreExecuteComands {
 		private GiveItem(String material,String data, String cantida){
 			this.ma = material.trim();
 			if(data == null || data.length() == 0 || !CoreUtils.isint(data.trim())){
-				
 				this.da= 0;
 			}else{
 				this.da= Short.valueOf(data.trim());
 			}
-			
 			if(cantida == null || cantida.length() == 0 || !CoreUtils.isint(cantida.trim())){
 				this.ca = 1;
 			}else{
 				this.ca = Integer.valueOf(cantida.trim());
 			}
-			
-			
 		}
 		
 		@SuppressWarnings("deprecation")
@@ -68,25 +64,16 @@ public class CoreExecuteComands {
 			ItemStack i = new ItemStack(mate,this.ca,(short)this.da);
 			p.getInventory().addItem(new ItemStack(i));
 		}
-		
 	}
 	
 	
 	private TypeCMD commandtype;
-	
 	private static Economy economy = null;
-	
 	private static PlayerPoints playerPoints = null;
-	
 	private Player player;
-	
 	private JavaPlugin plugin;
-	
 	private String command;
-	
 	private String prefix;
-	
-	
 	
 	public CoreExecuteComands(Player p, String cm, JavaPlugin plugin,String prefix){
 		this.player = p;
@@ -134,18 +121,15 @@ public class CoreExecuteComands {
 				this.command = cm.substring(cmss.length());
 				p.sendMessage(CoreColor.colorCodes(this.prefix+"The type of command " + cmss + " is not valid please contact the administrator."));
 			}else{
-				this.command = cm;
-				
+				this.command = cm;	
 			}
 		}
 		this.command = this.command.trim();
 	}
 	
-	
 	public void bungee(){
 		ByteArrayOutputStream b = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(b);
-        
         try {
 			out.writeUTF("Connect");
 			out.writeUTF(this.command);
@@ -154,8 +138,6 @@ public class CoreExecuteComands {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        
         player.sendPluginMessage(this.plugin, "BungeeCord", b.toByteArray());
 	}
 	
@@ -165,7 +147,6 @@ public class CoreExecuteComands {
 			player.teleport(w.getSpawnLocation());
 		}
 	}
-	
 	
 	public void cmOP(){
 		this.command = this.command.replaceAll("<player>", this.player.getName());
@@ -202,17 +183,14 @@ public class CoreExecuteComands {
 					String a = dv[1];
 					GiveItem i = new GiveItem(m,d,a);
 					i.give(this.player);
-					
 				}else{
 					String d = ds[1];
 					GiveItem i = new GiveItem(m,d,"1");
 					i.give(this.player);
-					
 				}
 			}else{
 				GiveItem i = new GiveItem(m,"0","1");
 				i.give(this.player);
-				
 			}
 		}else{
 			if(this.command.contains(" ")){
@@ -225,9 +203,7 @@ public class CoreExecuteComands {
 			}else{
 				GiveItem i = new GiveItem(this.command,"0","1");
 				i.give(this.player);
-				
 			}
-
 		}
 	}
 	
@@ -260,8 +236,6 @@ public class CoreExecuteComands {
 		playerPoints = point;
 	}
 	
-	
-
 	public void cmPOINTS(){
 		if(!CoreUtils.isint(command)){
 			this.player.sendMessage(CoreColor.colorCodes(this.prefix+"Invalid points amount: " + this.command+". Please inform the staff."));
@@ -281,10 +255,7 @@ public class CoreExecuteComands {
 		}
 	}
 	
-	
-	
 	public void execute(){
-		
 		switch(this.commandtype){
 		case PLAYER:
 			this.command = this.command.replaceAll("<player>", this.player.getName());
@@ -320,19 +291,15 @@ public class CoreExecuteComands {
 			cmPOINTS();
 			break;
 		default:
-			this.command = this.command.replaceAll("<player>", this.player.getName());
-			
+			this.command = this.command.replaceAll("<player>", this.player.getName());		
 			new BukkitRunnable() {
 	            @Override
 	            public void run() {
 	            	Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
 	            }
 	        }.runTask(plugin);
-			
-			
 			break;
 		}
-	}
-	
+	}	
 }
 

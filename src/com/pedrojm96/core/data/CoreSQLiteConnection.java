@@ -9,37 +9,40 @@ import java.sql.SQLException;
 import com.pedrojm96.core.CoreLog;
 import com.pedrojm96.core.CorePlugin;
 
+
+
+/**
+ * Facilita la creacion de la conexion a la base de datos sqlite.
+ * 
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ *
+ */
 public class CoreSQLiteConnection {
 	
 	private CoreLog log;
-
 	private CorePlugin plugin;
 	private Connection connection;
-	
 	private File dataFolder;
 	
 	public CoreSQLiteConnection(CorePlugin cplugin) {
 		this.log = cplugin.getLog();
 		this.log.info("Data set to SQLite");
 		this.plugin = cplugin;
-		
 		dataFolder = new File(this.plugin.getInstance().getDataFolder(),"sqlite.db");
-	    
 	    if (!dataFolder.exists()){
             try {
                 dataFolder.createNewFile();
             } catch (IOException e) {
             	 this.log.error("File write error: data.db",e); 
             }
-        }
-		
+        }	
 		connection = getConnection();
 	}
 	
 	public CorePlugin getPlugin() {
 		return this.plugin;
 	}
-	
 	
 	public void close() {
 		try {
@@ -51,7 +54,6 @@ public class CoreSQLiteConnection {
 	}
 	
 	public Connection getConnection() {
-		
 	    try {
             if(connection!=null&&!connection.isClosed()){
                 return connection;
@@ -69,5 +71,4 @@ public class CoreSQLiteConnection {
         }
 	    return null;
 	}
-	
 }

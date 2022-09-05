@@ -5,16 +5,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
-import com.pedrojm96.core.CoreColor;
-
+/**
+ * Para comprobar de si actualizaciones del plugin en servidor de minecraft implementando la api de bukkt/spigot.
+ * 
+ * @author PedroJM96
+ * @version 1.1 5-09-2022
+ *
+ */
 public class CheckForUpdatesPlayerRun extends BukkitRunnable{
 
-	
 	private JavaPlugin plugin;
 	private Player player;
-	
 	private String prefix;
-	
 	private int project = 0;
 	
 	public CheckForUpdatesPlayerRun(Player player,String prefix ,JavaPlugin plugin, int projectID) {
@@ -26,15 +28,12 @@ public class CheckForUpdatesPlayerRun extends BukkitRunnable{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		if(player==null) {
 			return;
 		}
-		
 		if(!player.isOnline()) {
 			return;
 		}
-		
 		CoreSpigotUpdater updater = new CoreSpigotUpdater(this.plugin, this.project);
     	try {
             if (updater.checkForUpdates()) {
@@ -43,8 +42,7 @@ public class CheckForUpdatesPlayerRun extends BukkitRunnable{
             	  CoreColor.message(this.player, this.prefix + "&7"+updater.getResourceURL());
             }	
         } catch (Exception e) {
-        	
-        	
+	
         }
 	}
 }

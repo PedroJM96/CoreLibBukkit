@@ -12,13 +12,10 @@ import xyz.xenondevs.particle.ParticleEffect;
  * Contiene los metodos estaticos para enviar efetos de particulas en el servidor.
  * 
  * @author PedroJM96
- * @version 1.1 26-12-2018
+ * @version 1.2 05-09-2022
  *
  */
 public enum CoreParticleEffect {
-	
-	
-	
 	
 	//minecraft 1.8.8
 	/**
@@ -384,12 +381,9 @@ public enum CoreParticleEffect {
 	*/
 	MOB_APPEARANCE;
 	
-
-	
 	public void playAll(Location loc, float xOffset, float yOffset, float zOffset, float speed, int count,int... extra) {
 		ParticleEffect.valueOf(this.name()).display(loc,new Vector(xOffset, yOffset, zOffset),speed,count,null, Bukkit.getOnlinePlayers()  );
 	}
-	
 	
 	public void play(Player player,Location loc, float xOffset, float yOffset, float zOffset, float speed, int count,int... extra) {
 		ParticleEffect.valueOf(this.name()).display(loc,new Vector(xOffset, yOffset, zOffset),speed,count,null, player );

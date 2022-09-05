@@ -21,16 +21,14 @@ import com.pedrojm96.core.CoreLog;
  * Facilita la creacion de base de datos mysql.
  * 
  * @author PedroJM96
- * @version 1.3 02-01-2020
+ * @version 1.4 05-09-2022
  *
  */
 public class CoreMySQL implements CoreSQL {
 
 	private CoreLog log;
 	private String tabla;
-	
 	private CoreMySQLConnection coreconnection;
-	
 	public Map<String, String> columns = new HashMap<String, String>();
 
 	public CoreMySQL(CoreMySQLConnection connection,String tabla) {
@@ -39,16 +37,12 @@ public class CoreMySQL implements CoreSQL {
 		this.coreconnection = connection;
 	}
 	
-	
-	
-
 	@Override
 	public boolean checkStorage() {
 		boolean existe;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet result = null;
-		
 		try {
 			connection = coreconnection.getConnection();
 			String query = "SELECT * FROM "+this.tabla;
@@ -56,15 +50,11 @@ public class CoreMySQL implements CoreSQL {
 			result = statement.executeQuery(query);
 			existe = true;
 			this.log.info("Loaded database");
-			
 			String listcolumns = "";
 			ResultSetMetaData metaData = result.getMetaData();
 			int rowCount = metaData.getColumnCount();
 			for (int i = 1; i <= rowCount; i++) {
-				
-				
 				this.columns.put(metaData.getColumnName(i).toLowerCase(), metaData.getColumnTypeName(i));
-				
 				listcolumns = listcolumns +"["+metaData.getColumnName(i).toLowerCase()+","+metaData.getColumnTypeName(i)+"] ";
 			}
 			this.log.info(listcolumns);
@@ -82,24 +72,19 @@ public class CoreMySQL implements CoreSQL {
 	
 	@Override
 	public boolean columnExists(String columnname) {
-		
 		return this.columns.containsKey(columnname.toLowerCase());
 	}
 	
 	@Override
 	public String getColumnType(String columnname) {
-		
 		return this.columns.get(columnname.toLowerCase());
 	}
 
 	@Override
 	public void addColumn(String columnname,String columntype) {
-		
 		Connection connection = null;
 		Statement statement = null;
-
 		try {
-			
 			connection = coreconnection.getConnection();
 			String query = "ALTER TABLE "+this.tabla+" ADD "+columnname+" "+columntype;
 			statement = connection.createStatement();
@@ -116,12 +101,9 @@ public class CoreMySQL implements CoreSQL {
 	
 	@Override
 	public void changeColumnType(String columnname,String columntype) {
-		
 		Connection connection = null;
 		Statement statement = null;
-
 		try {
-			
 			connection = coreconnection.getConnection();
 			String query = "ALTER TABLE "+this.tabla+" MODIFY "+columnname+" "+columntype;
 			statement = connection.createStatement();
@@ -135,8 +117,6 @@ public class CoreMySQL implements CoreSQL {
 			cleanup(connection,statement,null);
 		}
 	}
-	
-	
 	
 	protected void cleanup(Connection connection, Statement statement,ResultSet result){
 		if (connection != null) {
@@ -168,13 +148,11 @@ public class CoreMySQL implements CoreSQL {
 			}
 			catch (SQLException e)
 			{
-		    	  this.log.error("SQLException on cleanup [result].");  
+		    	this.log.error("SQLException on cleanup [result].");  
 			}
 		}
 		
 	}
-	
-	
 	
 	@Override
 	public void build(String ...paramsString) {
@@ -190,7 +168,6 @@ public class CoreMySQL implements CoreSQL {
 				query = query + paramsString[i]+", ";
 			}
 		}
-		
 		try {
 			
 			connection = coreconnection.getConnection();
@@ -204,8 +181,6 @@ public class CoreMySQL implements CoreSQL {
 		}
 	}
 	
-	
-
 	@Override
 	public boolean checkData(CoreWHERE paranWhere,String paranString) {
 		Connection connection = null;
@@ -255,14 +230,12 @@ public class CoreMySQL implements CoreSQL {
 			}	
 		}
 		Statement statement = null;
-		
 	    ResultSet result = null;
 	    String query = "INSERT INTO "+this.tabla+" ("+data+") VALUES ("+value+");";
 		try {
 			connection = coreconnection.getConnection();
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			this.log.fatalError("Could not create getter statement on insert: "+query,e);
@@ -274,7 +247,6 @@ public class CoreMySQL implements CoreSQL {
 		
 	}
 	
-
 	@Override
 	public String get(CoreWHERE paranWhere,String paranString) {
 		Connection connection = null;
@@ -298,13 +270,12 @@ public class CoreMySQL implements CoreSQL {
 		}
 		return value;
 	}
+	
 	@Override
 	public HashMap<String, String> get(CoreWHERE paranWhere,String... paranString) {
 		Connection connection = null;
-		// TODO Auto-generated method stub
 		HashMap<String, String> value = new HashMap<String, String>();
 		String getData = "";
-		
 		for(int i =0 ; i<paranString.length ; i++) {
 			if(i==(paranString.length - 1)) {
 				getData = getData +paranString[i].trim();
@@ -312,7 +283,6 @@ public class CoreMySQL implements CoreSQL {
 				getData = getData +paranString[i].trim()+",";
 			}
 		}
-		
 		String query = "SELECT "+getData+" FROM "+this.tabla+" WHERE "+paranWhere.get()+";";
 		Statement statement = null;
 		ResultSet result = null;
@@ -321,7 +291,6 @@ public class CoreMySQL implements CoreSQL {
 			statement = connection.createStatement();
 			result = statement.executeQuery(query);
 			if ((result != null) && (result.next())){
-				
 				for(int i =0 ; i<paranString.length ; i++) {
 					value.put(paranString[i], result.getString(paranString[i]));
 				}
@@ -338,10 +307,7 @@ public class CoreMySQL implements CoreSQL {
 	@Override
 	public List<HashMap<String, String>> getAll(CoreWHERE paranWhere, String criterio, String... paranString) {
 		Connection connection = null;
-		// TODO Auto-generated method stub
-		
 		String getData = "";
-		
 		for(int i =0 ; i<paranString.length ; i++) {
 			if(i==(paranString.length - 1)) {
 				getData = getData +paranString[i].trim();
@@ -356,8 +322,6 @@ public class CoreMySQL implements CoreSQL {
 		}else {
 			query = "SELECT "+getData+" FROM "+this.tabla+" WHERE "+paranWhere.get()+";";
 		}
-		
-		
 		Statement statement = null;
 		ResultSet result = null;
 		try {
@@ -366,12 +330,9 @@ public class CoreMySQL implements CoreSQL {
 			result = statement.executeQuery(query);
 			while ((result != null) && (result.next())){
 				HashMap<String, String> values = new HashMap<String, String>();
-				
-				
 				for(int i =0 ; i<paranString.length ; i++) {
 					values.put(paranString[i], result.getString(paranString[i]));
 				}
-				
 				lista.add(values);
 			}
 		}catch (SQLException e) {
@@ -386,10 +347,7 @@ public class CoreMySQL implements CoreSQL {
 	@Override
 	public List<HashMap<String, String>> getAll(String criterio, String... paranString) {
 		Connection connection = null;
-		// TODO Auto-generated method stub
-		
 		String getData = "";
-		
 		for(int i =0 ; i<paranString.length ; i++) {
 			if(i==(paranString.length - 1)) {
 				getData = getData +paranString[i].trim();
@@ -407,12 +365,9 @@ public class CoreMySQL implements CoreSQL {
 			result = statement.executeQuery(query);
 			while ((result != null) && (result.next())){
 				HashMap<String, String> values = new HashMap<String, String>();
-				
-				
 				for(int i =0 ; i<paranString.length ; i++) {
 					values.put(paranString[i], result.getString(paranString[i]));
 				}
-				
 				lista.add(values);
 			}
 		}catch (SQLException e) {
@@ -424,15 +379,11 @@ public class CoreMySQL implements CoreSQL {
 		return lista;
 	}
 	
-	
-	
-
 	@Override
 	public void update(CoreWHERE paranWhere,String... args) {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		String data = "";
-		
 		for(int i =0; i<args.length;i++) {
 			if(!args[i].trim().contains(":")) {
 				continue;
@@ -452,7 +403,6 @@ public class CoreMySQL implements CoreSQL {
 			}	
 		}
 		Statement statement = null;
-		
 	    ResultSet result = null;
 	    String query = "UPDATE "+this.tabla+" SET "+data+" WHERE "+paranWhere.get() +";";
 		try {
@@ -461,7 +411,6 @@ public class CoreMySQL implements CoreSQL {
 			statement.executeUpdate(query);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			this.log.fatalError("Could not create getter statement on update: "+query,e);
 		}
 		finally{
@@ -469,13 +418,11 @@ public class CoreMySQL implements CoreSQL {
 		}
 	}
 	
-	
 	@Override
 	public void update(String... args) {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		String data = "";
-		
 		for(int i =0; i<args.length;i++) {
 			if(!args[i].trim().contains(":")) {
 				continue;
@@ -486,7 +433,6 @@ public class CoreMySQL implements CoreSQL {
 			}
 			String locaData = local[0].trim();
 			String locaValue = local[1].trim();
-			
 			if(i==(args.length - 1)) {
 				data = data + locaData +"='"+locaValue+"'";
 				
@@ -495,7 +441,6 @@ public class CoreMySQL implements CoreSQL {
 			}	
 		}
 		Statement statement = null;
-		
 	    ResultSet result = null;
 	    String query = "UPDATE "+this.tabla+" SET "+data+";";
 		try {
@@ -504,7 +449,6 @@ public class CoreMySQL implements CoreSQL {
 			statement.executeUpdate(query);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			this.log.fatalError("Could not create getter statement on update: "+query,e);
 		}
 		finally{
@@ -512,20 +456,16 @@ public class CoreMySQL implements CoreSQL {
 		}
 	}
 	
-
 	@Override
 	public void delete(CoreWHERE paranWhere) {
 		Connection connection = null;
-		// TODO Auto-generated method stub
 		Statement statement = null;
-		
 	    ResultSet result = null;
 	    String query = "DELETE FROM "+this.tabla+" WHERE "+paranWhere.get() +";";
 		try {
 			connection = coreconnection.getConnection();
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			this.log.fatalError("Could not create getter statement on delete: "+query,e);
@@ -535,23 +475,17 @@ public class CoreMySQL implements CoreSQL {
 		}
 	}
 
-
-
 	@Override
 	public void close() {
 		// TODO Auto-generated method stub
 		coreconnection.close();
 	}
 
-
-
 	@Override
 	public void table(String table) {
 		// TODO Auto-generated method stub
 		this.tabla = table;
 	}
-
-
 
 	@Override
 	public void executeUpdate(String query) {
@@ -562,7 +496,6 @@ public class CoreMySQL implements CoreSQL {
 			connection = coreconnection.getConnection();
 			statement = connection.createStatement();
 			statement.executeUpdate(query);
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			this.log.fatalError("Could not create getter statement on insert: "+query,e);
@@ -574,15 +507,9 @@ public class CoreMySQL implements CoreSQL {
 		
 	}
 
-
-
-
 	@Override
 	public Connection getConnection() throws SQLException {
 		// TODO Auto-generated method stub
 		return coreconnection.getConnection();
 	}
-	
-	
-
 }

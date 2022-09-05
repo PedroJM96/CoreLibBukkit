@@ -14,24 +14,18 @@ import java.nio.file.StandardCopyOption;
 import com.pedrojm96.core.CoreLog;
 
 /**
- * Classloader that can load a jar from within another jar file.
+ * Para cargar las clases clas loader del plugins.
  *
- * <p>The "loader" jar contains the loading code & public API classes,
- * and is class-loaded by the platform.</p>
- *
- * <p>The inner "plugin" jar contains the plugin itself, and is class-loaded
- * by the loading code & this classloader.</p>
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ * 
  */
-
-
-
 public class CoreClassLoader extends URLClassLoader {
     static {
         ClassLoader.registerAsParallelCapable();
     }
 
     private static CoreLog log;
-    
     /**
      * Creates a new jar-in-jar class loader.
      *
@@ -53,7 +47,6 @@ public class CoreClassLoader extends URLClassLoader {
         if (urls.length == 0) {
             return;
         }
-
         try {
             Path path = Paths.get(urls[0].toURI());
             Files.deleteIfExists(path);
@@ -80,7 +73,6 @@ public class CoreClassLoader extends URLClassLoader {
         	log.error("Unable to load the plugin bootstrap class", e);
         	return null;
         }
-
         Constructor<? extends CoreLoader> constructor;
         try {
             constructor = plugin.getConstructor(loaderPluginType);
@@ -88,7 +80,6 @@ public class CoreClassLoader extends URLClassLoader {
         	log.error("Unable to get the plugin bootstrap constructor", e);
         	return null;
         }
-
         try {
             return constructor.newInstance(loaderPlugin);
         } catch (ReflectiveOperationException e) {
@@ -96,7 +87,6 @@ public class CoreClassLoader extends URLClassLoader {
         	return null;
         }
     }
-
     /**
      * Extracts the "jar-in-jar" from the loader plugin into a temporary file,
      * then returns a URL that can be used by the {@link JarInJarClassLoader}.
@@ -113,7 +103,6 @@ public class CoreClassLoader extends URLClassLoader {
         	log.error("Could not locate the plugin bootstrap files");
         	return null;
         }
-
         // create a temporary file
         // on posix systems by default this is only read/writable by the process owner
         Path path;
@@ -123,7 +112,6 @@ public class CoreClassLoader extends URLClassLoader {
         	log.error("Unable to create a temporary file to plugin bootstrap", e);
         	return null;
         }
-
         // mark that the file should be deleted on exit
         path.toFile().deleteOnExit();
 
@@ -134,7 +122,6 @@ public class CoreClassLoader extends URLClassLoader {
         	log.error("Unable to copy the plugin bootstrap files to temporary path", e);
         	return null;
         }
-
         try {
             return path.toUri().toURL();
         } catch (MalformedURLException e) {
@@ -142,5 +129,4 @@ public class CoreClassLoader extends URLClassLoader {
         	return null;
         }
     }
-
 }

@@ -1,5 +1,13 @@
 package com.pedrojm96.core.data;
 
+
+/**
+ * Para manejar los campos de una base de datos.
+ * 
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ *
+ */
 public class CoreField {
 
 	private String name;
@@ -16,7 +24,6 @@ public class CoreField {
 	public String toString() {
 		return name+" "+type;
 	}
-	
 	
 	/**
 	 * @return the name

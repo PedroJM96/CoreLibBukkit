@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
  * Contiene los metodos estaticos para enviar efetos de sonido en el servidor.
  * 
  * @author PedroJM96
- * @version 1.1 15-03-2019 https://gist.github.com/NiklasEi/7bd0ffd136f8459df0940e4501d47a8a
+ * @version 1.2 05-09-2022 https://gist.github.com/NiklasEi/7bd0ffd136f8459df0940e4501d47a8a
  *
  */
 public enum CoreSound {
@@ -205,19 +205,15 @@ public enum CoreSound {
     VILLAGER_NO("VILLAGER_NO", "ENTITY_VILLAGER_NO"),
     VILLAGER_YES("VILLAGER_YES", "ENTITY_VILLAGER_YES");
 
-	
 	private String[] versionDependentNames;
     private Sound cached = null;
 	
 	private CoreSound(String... versionDependentNames)
-	  {
+	{
 		this.versionDependentNames = versionDependentNames;
-	  }
-	
-	
+	}
 	
 	public Sound load(){
-		
 		if (cached != null) return cached;
         for (String name : versionDependentNames) {
             try {
@@ -227,12 +223,9 @@ public enum CoreSound {
             }
         }
         throw new IllegalArgumentException("Found no valid sound name for " + this.name());
-		
 	}
 	
-	
 	public void play(Player player){
-		
 		player.playSound(player.getLocation(), load(), 1.0F, 1.0F);	
 	}
 }

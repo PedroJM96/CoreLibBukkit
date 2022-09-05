@@ -13,12 +13,10 @@ import org.bukkit.entity.Player;
  * Contiene los metodos para codificar string con colores y enviar mensajes a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.4 03-01-2021
+ * @version 1.5 05-09-2022
  *
  */
 public class CoreColor {
-	
-	
 	/**
 	 * Colorea un string.
 	 * 
@@ -44,7 +42,6 @@ public class CoreColor {
 		String coloredText = ChatColor.translateAlternateColorCodes('&', nonColoredText);
         return coloredText;
     }
-	
 	/**
 	 * Envia una linea al jugador.
 	 * 
@@ -85,17 +82,15 @@ public class CoreColor {
 	 */
 	public static String coloriseTextComponentString(String string) {
 		if (string == null || string.length() == 0) return " ";
-		
-		
 		String localString = CoreColor.colorCodes(string.trim());
 		String newString = "";
-		String last = "�7";
+		String last = "§7";
 		if(localString.contains(" ")) {
 			String[] frases = localString.split(" ");
 			
 			for(int i = 0; i <frases.length; i++) {
 				String frase = frases[i].trim();
-				if(frase.startsWith("�")) {
+				if(frase.startsWith("§")) {
 					newString = newString + " " + frase ;
 					
 				}else {
@@ -107,11 +102,11 @@ public class CoreColor {
 		        {
 		            char c = frase.charAt(j);
 		            char m = frase.length() > 2 ? frase.charAt(j+2) : ' ';
-		            if (c == '�' && m == '�') {
-		            	last =  "�" + frase.charAt(j + 1) + "�" + frase.charAt(j + 3);
+		            if (c == '§' && m == '§') {
+		            	last =  "§" + frase.charAt(j + 1) + "§" + frase.charAt(j + 3);
 		            	j = 3;
-		            }else if(c == '�'){
-		            	last =  "�" + frase.charAt(j + 1);
+		            }else if(c == '§'){
+		            	last =  "§" + frase.charAt(j + 1);
 		            	j = 1;
 		            }
 		        }
@@ -223,7 +218,6 @@ public class CoreColor {
 		c.add("§R");
 		return c;
 	}
-	
 	public static String clearColor(String coloredText) {
 		String nonColoredText = coloredText;
 		

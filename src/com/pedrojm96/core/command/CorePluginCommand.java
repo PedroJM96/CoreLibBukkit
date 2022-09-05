@@ -21,25 +21,20 @@ import com.pedrojm96.core.CoreColor;
  * Facilita la creacion de comandos en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.3 06-04-2020
+ * @version 1.4 05-09-2022
  *
  */
 public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
 
 	public abstract boolean onCommand(CommandSender sender,String command,String[] args);
-	
-	
 	public abstract List<String> onCustomTabComplete(CommandSender sender, List<String> list, String[] args);
-	
 	public abstract String getErrorNoPermission();
 	public abstract String getPerm();
-	
 	public abstract String getName();
 	public abstract List<String> getAliases();
 	public abstract String getUsage();
 	public abstract String getDescription();
 	
-
 	public boolean hasPerm(CommandSender sender){
 		if(getPerm() == null){
 			return true;
@@ -51,17 +46,14 @@ public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
 	}
 	
 	private HashMap<List<String>, CoreSubCommand> subcommands = new HashMap<List<String>,CoreSubCommand>();
-	
 	public void addSubCommand(List<String> subcmds,CoreSubCommand s){
     	subcommands.put(subcmds, s);
     }
-	
 	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String arg2, String[] arg3) {
 		// TODO Auto-generated method stub
 		if (command.getName().equalsIgnoreCase(getName())) {
-			
 			if(!hasPerm(sender)) {
 				return null;
 			}
@@ -98,7 +90,6 @@ public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
 			    			for(int i = 1; i<arg3.length;i++) {
 			    				subargs[i-1] = arg3[i];
 			    			}
-							
 							result = subcommands.get(subcommand).onCustomTabComplete(sender, result, subargs);
 						}
 						break;
@@ -107,9 +98,7 @@ public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
 				if(result!=null && !result.isEmpty()) {
 					return result;
 				}
-				
 			}
-			
 			return null;
 		}
 		return null;
@@ -125,12 +114,9 @@ public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
 			return true;
 		}
 		boolean retorno = false;
-		
 		if (arg3.length == 0) {
 			return onCommand(sender,command.getName(),arg3);
-			
 		}
-
     	//se verifica si el comando coincide un un comando almacenado(Incluye el alias del comando)
     	for(List<String> s : subcommands.keySet()){
     		//si el comando coincide
@@ -140,17 +126,14 @@ public abstract class CorePluginCommand implements CommandExecutor,TabExecutor{
     			for(int i = 1; i<arg3.length;i++) {
     				args[i-1] = arg3[i];
     			}
-    			
     			retorno =  subcommands.get(s).rum(sender,arg3[0].toLowerCase(),args);
     			break;
     		}
     	}
-    	
     	//si es comando no es correto
     	if(!retorno){
     		return onCommand(sender,command.getName(),arg3);
     	}
 		return retorno;
 	}
-
 }

@@ -9,15 +9,18 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
-
+/**
+ * Para trabajar con los mensajes del servicio de Rabbitmq.
+ * 
+ * @author PedroJM96
+ * @version 1.1 5-09-2022
+ *
+ */
 public class RabbitmqMessagingService {
 
 	private Connection connection;
     private Channel channel;
-    
-    private static String EXCHANGE_NAME = "pro";
-	
-	
+    private static String EXCHANGE_NAME = "pixel";
     private CoreLog log;
     
 	public RabbitmqMessagingService(CoreLog log, String exchange_name,String host,String virtual_host, int port,String username,String password) {
@@ -31,18 +34,15 @@ public class RabbitmqMessagingService {
         factory.setHost(host);
         factory.setAutomaticRecoveryEnabled(true);
         factory.setNetworkRecoveryInterval(TimeUnit.SECONDS.toMillis(1));
-        
         try{
         	connection = factory.newConnection();
         	channel = connection.createChannel();
         	log.error("Connection with rabbitmq");
-        	
         }catch (IOException|TimeoutException exception){
         	log.error("Connection error with rabbitmq");
         	log.error(exception.getMessage());
         }
 	}
-	
 	
 	public void join(String canal, DeliverCallback deliverCallback){
         try {
@@ -67,7 +67,7 @@ public class RabbitmqMessagingService {
 		}
        
     }
-	
+
 	 public void send(String canal, JsonObject json) { 
 		 try {
 			 if(json.isJsonNull()) {

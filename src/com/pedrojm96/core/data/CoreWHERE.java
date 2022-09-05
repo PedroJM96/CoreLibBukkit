@@ -5,7 +5,7 @@ package com.pedrojm96.core.data;
  * Facilita la selecion de consultas sql.
  * 
  * @author PedroJM96
- * @version 1.0 13-10-2018
+ * @version 1.1 05-09-2012
  *
  */
 public class CoreWHERE {

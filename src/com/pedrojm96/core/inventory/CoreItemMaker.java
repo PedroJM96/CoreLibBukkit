@@ -23,7 +23,7 @@ import com.pedrojm96.core.CoreVariables;
  * Contiene los metodos para crear item en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.0 03-04-2020
+ * @version 1.2 05-09-2022
  *
  */
 public class CoreItemMaker {
@@ -44,25 +44,19 @@ public class CoreItemMaker {
 		this.glow = glow;
 	}
 	
-	
 	@SuppressWarnings("deprecation")
 	public ItemStack getItemStack() {
-		
 		 ItemStack item = new ItemStack(this.material);
-		 
 		 if (this.data != null) {
 			 item.setDurability(this.data.shortValue());
 		 }
-		 
 		 Material checkMaterial = null;
-
 		 if(CoreUtils.Version.getVersion().esMayorIgual(CoreUtils.Version.v1_13)) {
 			 checkMaterial = Material.getMaterial("PLAYER_HEAD");
 			 this.data = 3;
 		 }else {
 			 checkMaterial = Material.getMaterial("SKULL_ITEM");
 		 }
-		 
 		 if((this.material.equals(checkMaterial)) && ((this.data==null?0:this.data) == 3) &&  (this.skull!=null)) {
 			 //SkullItem------------------------
 			 SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
@@ -90,24 +84,18 @@ public class CoreItemMaker {
 	
 	@SuppressWarnings("deprecation")
 	public ItemStack getItemStack(OfflinePlayer fromplayer) {
-		
 		 ItemStack item = new ItemStack(this.material);
-		 
 		 if (this.data != null) {
 			 item.setDurability(this.data.shortValue());
 		 }
-		 
 		 Material checkMaterial = null;
-
 		 if(CoreUtils.Version.getVersion().esMayorIgual(CoreUtils.Version.v1_13)) {
 			 checkMaterial = Material.getMaterial("PLAYER_HEAD");
 			 this.data = 3;
 		 }else {
 			 checkMaterial = Material.getMaterial("SKULL_ITEM");
 		 }
-		 
 		 if((this.material.equals(checkMaterial)) && ((this.data==null?0:this.data) == 3) &&  (this.skull!=null)) {
-			 //SkullItem------------------------
 			 SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
 			 skullMeta.setDisplayName(displayName);
 			 skullMeta.setLore(lore);
@@ -131,7 +119,6 @@ public class CoreItemMaker {
 		 return item;
 	}
 	
-	
 	private void URL(SkullMeta skullMeta) {
 		 String localString = this.skull;
 		 String url = localString.split("url:")[1].trim();
@@ -148,12 +135,10 @@ public class CoreItemMaker {
 		 }
 	}
 	
-	
 	private void TEXTURES(SkullMeta skullMeta) {
-		String localString = this.skull;
+		 String localString = this.skull;
 		 String textures = localString.split("textures:")[1].trim();
-		 GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-           
+		 GameProfile profile = new GameProfile(UUID.randomUUID(), null); 
 		 profile.getProperties().put("textures", new Property("textures", new String(textures)));
 		 Field profileField = null;
 		 try {
@@ -186,7 +171,6 @@ public class CoreItemMaker {
 			 new MojangTexture(item,slot,player,textureplayername,this.glow,plugin.getLog()).runTaskAsynchronously(plugin.getInstance());
 		 }
 	}
-	
 	
 	private void PLAYER(SkullMeta skullMeta,ItemStack item, OfflinePlayer fromplayer) {
 		Player playerBukkit = Bukkit.getPlayerExact(CoreVariables.replace(skull, fromplayer));
@@ -271,8 +255,6 @@ public class CoreItemMaker {
 			 plugin.getLog().error("Error al dar formato al gameprofile con texturas", e);
 		 }
 	}
-	
-	
 	/**
 	 * @return the lore
 	 */

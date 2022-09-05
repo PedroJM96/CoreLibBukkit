@@ -25,16 +25,13 @@ import com.pedrojm96.core.inventory.CoreNBTAttribute;
  * Contiene los metodos para codificar item de menu en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.5 03-04-2020
+ * @version 1.6 05-09-2022
  *
  */
 public class CoreMenuItem {
-
-
 	 private Material material;
 	 private Short data = null;
 	 private String no_permision_message = "You no have permision to use this item";
-	 
 	 private String name = null;
 	 private String permission = null;
 	 private boolean permission_to_view = false;
@@ -50,13 +47,10 @@ public class CoreMenuItem {
 	 private List<String> version_list;
 	 private String no_version_message = "It is only available in the <version> versions.";
 	 
-	
-	 
 	 public CoreMenuItem(Material material)
 	 {
 		 this.material = material;
 	 }
-	 
 
 	 public void setMaxrows(Integer s){
 		 if ((s == null) || (s.intValue() == 0))
@@ -66,7 +60,6 @@ public class CoreMenuItem {
 		 }   
 		 this.maxrows = s;
 	}
-
 
 	 public String getName() {
 		 return this.name;
@@ -135,9 +128,7 @@ public class CoreMenuItem {
 		 }
 		 this.lore = lore;
 	 }
-	 
-	
-	 
+
 	 public void setPrice(Integer s)
 	 {
 		 if ((s == null) || (s.intValue() == 0))
@@ -172,14 +163,17 @@ public class CoreMenuItem {
 		 s = Integer.valueOf(s.intValue() - 1);
 		 this.slot = s;
 	 }
+	 
 	 public void setPermissionToView(boolean permission_to_view)
 	 {
 		 this.permission_to_view = permission_to_view;
 	 }
+	 
 	 public boolean getPermissionToView()
 	 {
 	     return this.permission_to_view; 
 	 }
+	 
 	 public void setkOpen(Boolean s)
 	 {
 		 if (s == null) {
@@ -188,6 +182,7 @@ public class CoreMenuItem {
 			 this.kopen = s;
 		 }
 	 }
+	 
 	 public void setSkull(String skull)
 	 {
 		 if ((skull == null) || (skull.length() == 0)) {
@@ -216,44 +211,29 @@ public class CoreMenuItem {
 		 }
 	 }
 	 
-	 @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public boolean like(ItemStack s,int sl,Player player)
 	 {
 		 if (s == null) {
-			 
-			
-			 
 			 return false;
 		 }
-		 
 		 if(this.slot!=sl) {
-			
 			 return false;
 		 }
-		 
 		 if (s.getType() != this.material) {
-			
 			 return false;
 		 }
-		
 		 ItemMeta meta = s.getItemMeta();
 		 if (this.name == null && meta.hasDisplayName()){
-			 
 			 return false; 
 		 }  
-		 
-		 if (this.name != null && !meta.hasDisplayName()) {
-			 
+		 if (this.name != null && !meta.hasDisplayName()) { 
 			 return false;
 		 } 
-		 
 		 if (!meta.getDisplayName().equals(CoreVariables.replace(this.name.replaceAll("<price>", String.valueOf(getPrice())), player))) {
-			
 			 return false;
 		 }
-		 
 		 if ((this.data != null) && (this.data.shortValue() != s.getDurability())) {
-			
 			 return false;
 		 }
 		 return true;
@@ -261,7 +241,6 @@ public class CoreMenuItem {
 	  
 	public ItemStack create(Player player,Inventory menu,CorePlugin plugin)
 	 {
-		 
 		 CoreItemMaker itemmaker = new CoreItemMaker(this.material,slot,enchant_glow,player,plugin);
 		 itemmaker.setSkull(skull);
 		 itemmaker.setData(this.data);
@@ -289,9 +268,7 @@ public class CoreMenuItem {
 				 itemmaker.setLore(CoreVariables.replaceList(locallore, player));
 			 }
 		 }
-		 
 		 ItemStack item = itemmaker.getItemStack();
-		 //item = CoreNBTAttribute.removeAttributesPotion(item);
 		 this.material = item.getType();
 		 if(enchant_glow) {
 			 return  CoreNBTAttribute.addGlow(item);		 
@@ -302,7 +279,6 @@ public class CoreMenuItem {
 	
 	public ItemStack create(Player player,OfflinePlayer fromplayer,Inventory menu,CorePlugin plugin)
 	 {
-		 
 		 CoreItemMaker itemmaker = new CoreItemMaker(this.material,slot,enchant_glow,player,plugin);
 		 itemmaker.setSkull(skull);
 		 itemmaker.setData(this.data);
@@ -330,9 +306,7 @@ public class CoreMenuItem {
 				 itemmaker.setLore(CoreVariables.replaceList(locallore, fromplayer));
 			 }
 		 }
-		 
 		 ItemStack item = itemmaker.getItemStack(fromplayer);
-		 //item = CoreNBTAttribute.removeAttributesPotion(item);
 		 this.material = item.getType();
 		 if(enchant_glow) {
 			 return  CoreNBTAttribute.addGlow(item);		 

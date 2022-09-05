@@ -19,27 +19,21 @@ import net.milkbowl.vault.permission.Permission;
  * Para dar soporte al chat, permisos y placeholderapi se deben iniciar sus respetivos metodos.
  * 
  * @author PedroJM96
- * @version 1.4 23-04-2020
+ * @version 1.5 05-09-2022
  *
  */
 public class CoreVariables {
 
 	private static Permission permission = null;
-	
 	private static Chat chat = null;
-	
 	public static List<String> vu = new ArrayList<String>();
-	
 	private static boolean placeholderAPI = false;
-	
 	private static SuperStatsAPI superstatsAPI;
-	
 	public static void superstats(SuperStatsAPI sstats)
-	  {
+	{
 	    superstatsAPI = sstats;
-	  }
+	}
 	
-
 	public static void permission(Permission per) {
 		permission = per;
 	}
@@ -81,7 +75,6 @@ public class CoreVariables {
 		if (newString.contains("<player-z>")){
 			newString = newString.replaceAll("<player-z>", String.valueOf(p.getLocation().getBlockZ()));
 		}
-		
 		if (newString.contains("<rank>")){
 			if(permission != null) {
 				if(!permission.getName().equalsIgnoreCase("SuperPerms")) {
@@ -91,12 +84,9 @@ public class CoreVariables {
 							newString = newString.replaceAll("<rank>", g);
 						}
 					}
-
 				}
 			}	
 		}
-		
-		
 		if(chat != null) {
 			if (newString.contains("<prefix>")){
 				newString = newString.replaceAll("<prefix>", chat.getPlayerPrefix(p));
@@ -114,7 +104,6 @@ public class CoreVariables {
 		    	
 		    }
 		}
-		
 		if (superstatsAPI != null)
 	    {
 	      newString = superstatsAPI.replaceStats(newString, p);
@@ -124,7 +113,6 @@ public class CoreVariables {
 		return newString;
 	}
 	
-	
 	public static String replace(String string, OfflinePlayer p){
 		if(string == null){
 			return "";
@@ -133,7 +121,6 @@ public class CoreVariables {
 		if (newString.contains("<player>")){
 			newString = newString.replaceAll("<player>", p.getName());
 		}
-		
 		newString = replaceUcode(newString);
 		if(placeholderAPI){
 			try{
@@ -143,7 +130,6 @@ public class CoreVariables {
 		    	
 		    }
 		}
-		
 		if (superstatsAPI != null)
 	    {
 	      newString = superstatsAPI.replaceStats(newString, p.getUniqueId().toString());
@@ -152,7 +138,6 @@ public class CoreVariables {
 		newString = CoreColor.colorCodes(newString);
 		return newString;
 	}
-	
 	
 	public static List<String> replaceList(List<String> list,Player p) {
 		List<String> localList = new ArrayList<String>();
@@ -189,7 +174,6 @@ public class CoreVariables {
 	      newString = newString.replaceAll("<ucode" + code + ">", 
 	        String.valueOf((char)Integer.parseInt(code, 16)));
 	    }
-	    
 	    if (newString.contains("<a>")) {
 	    	newString = newString.replaceAll("<a>", "á");
 	    }
@@ -249,7 +233,4 @@ public class CoreVariables {
 		vu.add("«");//31
 		vu.add("¿");//32
 	}
-	
-	
-
 }

@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Permite comprobar si ay actualizaciones para el plugin en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.1 03-01-2021
+ * @version 1.2 05-09-2022
  *
  */
 public class CoreSpigotUpdater {
@@ -32,7 +32,6 @@ public class CoreSpigotUpdater {
     public int getProjectID() {
         return project;
     }
- 
 
     public String getLatestVersion() {
         return newVersion;

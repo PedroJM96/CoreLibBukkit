@@ -7,20 +7,18 @@ import java.security.SecureRandom;
  * Contiene los metodos estaticos para encritar string.
  * 
  * @author PedroJM96
- * @version 1.0 22-09-2018
+ * @version 1.1 5-09-2022
  *
  */
 public enum CoreEncryption {
 	SHA512("SHA512"),  
 	MD5("MD5"),  
 	SHA256("SHA256");  
-	
 	private String type;
 	
 	private CoreEncryption(String type) {
 		this.type = type;
 	}
-	
 	
 	public String encrypt(String base) {
 		String retorno;
@@ -40,7 +38,6 @@ public enum CoreEncryption {
 		}
 		return retorno;
 	}
-	
 	
 	private String sha512(String base)
 	{

@@ -20,14 +20,11 @@ import com.pedrojm96.core.CorePlugin;
 import com.pedrojm96.core.CoreUtils;
 
 
-
-
-
 /**
  * Contiene los metodos para codificar un menu en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.4 19-09-2021
+ * @version 1.6 05-09-2022
  *
  */
 public class CoreMenu {
@@ -44,7 +41,6 @@ public class CoreMenu {
 	private int slot;
 	private CorePlugin plugin;
 	
-	
 	public CoreMenu(String name, ConfigurationSection sectionitems,CorePlugin plugin) {
 		this.name = name;
 		this.sectionitems = sectionitems;
@@ -53,7 +49,7 @@ public class CoreMenu {
 	
 	public void create(int Row,Player player){
 		slot = getSlot(Row);
-		if(CoreUtils.mc1_8 || CoreUtils.mc1_9 || CoreUtils.mc1_10 || CoreUtils.mc1_11 || CoreUtils.mc1_12) {
+		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
 			this.name = CoreColor.colorCodes(this.name);
 		}else {
 			if(this.name.contains("&k") ) {
@@ -68,31 +64,25 @@ public class CoreMenu {
 			if(this.name.contains("§K") ) {
 				this.name = this.name.replaceAll("§K", "");
 			}
-			
 			this.name = CoreColor.colorCodes(this.name);
 		}
 		Inventory m= Bukkit.createInventory(null,slot, this.name);
 		if(this.getGlassEnable()) {
 			int color = this.getGlasscolor();
-			if(CoreUtils.mc1_8 || CoreUtils.mc1_9 || CoreUtils.mc1_10 || CoreUtils.mc1_11 || CoreUtils.mc1_12) {
+			if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
 				for (int i = 0; i < slot; i++)
 				{
 					ItemStack it = createItem(" ",160,color);
 			        m.setItem(i, it);
 				}
 			}else {
-				
 				String material = this.getGlasscolor(color);
-				
 				for (int i = 0; i < slot; i++)
 				{
 					ItemStack it = createItem(" ",material);
 			        m.setItem(i, it);
 				}
-			}
-			
-			
-			
+			}	
 		}
 		for (CoreMenuItem item : items) {
 			if(item.getPermissionToView()){
@@ -105,9 +95,6 @@ public class CoreMenu {
 		}
 		player.openInventory(m);
 	}
-	
-	
-	
 	
 	public String getGlasscolor(int color) {
 		String retorno;
@@ -169,7 +156,7 @@ public class CoreMenu {
 	
 	public void createFromPlayer(int Row,Player player,OfflinePlayer fromplayer){
 		slot = getSlot(Row);
-		if(CoreUtils.mc1_8 || CoreUtils.mc1_9 || CoreUtils.mc1_10 || CoreUtils.mc1_11 || CoreUtils.mc1_12) {
+		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
 			this.name = CoreColor.colorCodes(this.name);
 		}else {
 			for(String color : CoreColor.getAlternateColorList()) {
@@ -199,8 +186,6 @@ public class CoreMenu {
 		}
 		player.openInventory(m);
 	}
-	
-	
 	
 	public String getPerm(){
 		return this.perm;
@@ -232,15 +217,18 @@ public class CoreMenu {
 	public void setGlasscolor(int color){
 		this.glass_color = color;
 	}
+	
 	public int getGlasscolor(){
 		return this.glass_color;
 	}
 	public void setGlassEnable(boolean enable){
 		this.glass_enable = enable;
 	}
+	
 	public boolean getGlassEnable(){
 		return this.glass_enable;
 	}
+	
 	public void setSound(String sound){
 		if(sound==null || sound.isEmpty()){
 			this.sound = null;
@@ -250,9 +238,7 @@ public class CoreMenu {
 			}catch(Exception ex){
 				this.sound = null;
 			}
-			
 		}
-		
 	}
 	
 	public String getCommands(){
@@ -280,11 +266,10 @@ public class CoreMenu {
 		createFromPlayer(this.rows,player,fromplayer);
 	}
 	
-	
-	
 	public int getRows(){
 		return this.rows;
 	}
+	
 	@SuppressWarnings("deprecation")
 	private static ItemStack createItem(String name,int mate,int shrt) {
 		ItemStack i = new ItemStack(CoreMaterial.getMaterial(mate) ,1,(short)shrt);
@@ -345,9 +330,6 @@ public class CoreMenu {
 					item.setSlot(Integer.valueOf(nodo.getInt("slot")));
 					item.setEnchantGlow(nodo.getBoolean("enchant-glow"));
 					item.setData(Short.valueOf((short)nodo.getInt("data")));
-					
-					
-					
 					item.setPrice(Integer.valueOf(nodo.getInt("price")));
 					item.setkOpen(nodo.getBoolean("keep-open"));
 					item.setPermissionToView(nodo.getBoolean("permission-to-view"));
@@ -355,8 +337,6 @@ public class CoreMenu {
 					item.setVersionList(nodo.getStringList("version-list"));
 					item.setNoVersionMessage(nodo.getString("no-version-message"));
 					item.setNoPermisionMessage(nodo.getString("no-permision-message"));
-					
-					
 					if ((nodo.isSet("lore")) && (nodo.isList("lore"))) {
 			        	item.setLore(nodo.getStringList("lore"));
 			        }
@@ -367,12 +347,10 @@ public class CoreMenu {
 			        	item.setCommands(nodo.getStringList("commands"));
 			        }
 			        items.add(item);
-					
 				}
 			}else {
 				String mate_data;
-				
-				if(CoreUtils.isPre1_13()) {
+				if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
 					if(nodo.isSet("material-old")) {
 						mate_data = nodo.getString("material-old");
 					}else {
@@ -385,9 +363,6 @@ public class CoreMenu {
 						mate_data = nodo.getString("material-old");
 					}
 				}
-				
-				
-				
 				if(Material.getMaterial(mate_data.contains(":") ? mate_data.split(":")[0].trim().toUpperCase() : mate_data.toUpperCase()) == null) {
 					plugin.getLog().error("Menu-Item: The item " + key + " has an invalid item Material: " + (mate_data.contains(":") ? mate_data.split(":")[0].trim().toUpperCase() : mate_data.toUpperCase()) + ".");
 				}else {
@@ -400,7 +375,6 @@ public class CoreMenu {
 						mate = mate_data.toUpperCase();
 						data = Short.valueOf((short)nodo.getInt("data"));
 					}
-					
 					CoreMenuItem item = new CoreMenuItem(Material.getMaterial(mate));
 					item.setPerm(nodo.getString("permission"));
 					item.setName(nodo.getString("name"));
@@ -408,8 +382,6 @@ public class CoreMenu {
 					item.setSlot(Integer.valueOf(nodo.getInt("slot")));
 					item.setEnchantGlow(nodo.getBoolean("enchant-glow"));
 					item.setData(data);
-					
-					
 					item.setPrice(Integer.valueOf(nodo.getInt("price")));
 					item.setkOpen(nodo.getBoolean("keep-open"));
 					item.setPermissionToView(nodo.getBoolean("permission-to-view"));
@@ -417,7 +389,6 @@ public class CoreMenu {
 					item.setVersionList(nodo.getStringList("version-list"));
 					item.setNoVersionMessage(nodo.getString("no-version-message"));
 					item.setNoPermisionMessage(nodo.getString("no-permision-message"));
-					
 					if ((nodo.isSet("lore")) && (nodo.isList("lore"))) {
 			        	item.setLore(nodo.getStringList("lore"));
 			        }
@@ -432,6 +403,4 @@ public class CoreMenu {
 			}
 		}
 	}
-	
-	
 }

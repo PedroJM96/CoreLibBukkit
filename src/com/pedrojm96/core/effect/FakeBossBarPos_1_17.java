@@ -13,7 +13,7 @@ import com.pedrojm96.core.effect.CoreBossBar.Style;
  * Objeto que contiene los metodos del falso BossBar en las versiones iguales o superiores a 1.17 del servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.1 19-08-2022
+ * @version 1.3 05-09-2022
  *
  */
 public class FakeBossBarPos_1_17 implements FakeBossBar{
@@ -27,45 +27,34 @@ public class FakeBossBarPos_1_17 implements FakeBossBar{
 	private BarColor color;
 	private BarStyle style;
 	
-	
 	public FakeBossBarPos_1_17(Plugin plugin,Player player, String mensaje,Color color,Style style,float pro) {
 		this.name = mensaje;
 		this.player = player;
 		this.color = BarColor.valueOf(color.name());
 		this.style = BarStyle.valueOf(style.name().replaceAll("PROGRESS", "SOLID").replaceAll("NOTCHED", "SEGMENTED"));
-
 		if(pro>0) {
 			isProgress = true;
 			this.progress = pro;
 		}else {
 			isProgress = false;
 			this.progress = this.maxProgress;
-
 		}
-		
 		try {
 			createBossBattleServer();
 		}catch (Exception e) {
 			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public void createBossBattleServer() throws Exception{
-		
 		this.bar = Bukkit.createBossBar(this.name, this.color, this.style);
 	}
 	
-	
-	
 	@Override
 	public void setName(String paramString) {
-		// TODO Auto-generated method stub
 		this.name = paramString;
-		bar.setTitle(paramString);
-		
+		bar.setTitle(paramString);	
 	}
 
 	@Override
@@ -100,5 +89,4 @@ public class FakeBossBarPos_1_17 implements FakeBossBar{
 		// TODO Auto-generated method stub
 		return this.progress;
 	}
-	
 }

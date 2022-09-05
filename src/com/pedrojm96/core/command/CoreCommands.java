@@ -15,13 +15,16 @@ import org.bukkit.plugin.SimplePluginManager;
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CorePlugin;
 
-
+/**
+ * Para administrar los commandos.
+ * 
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ *
+ */
 public class CoreCommands {
 	
-	
 	public static void registerCommand(CorePluginCommand command,CorePlugin plugin) {
-		
-		
 		PluginCommand plugincommands = createPluginCommand(command.getName(),plugin);
 		if (plugincommands != null) {
 			plugincommands.setAliases( command.getAliases() )
@@ -53,7 +56,6 @@ public class CoreCommands {
 	    return null;
 	}
 	
-	
 	/**
 	* Get the {@link CommandMap} instance of {@link org.bukkit.plugin.PluginManager}
 	*
@@ -72,6 +74,4 @@ public class CoreCommands {
 	    }
 	    return null;
 	}
-	
-	
 }

@@ -14,7 +14,7 @@ import com.pedrojm96.core.CoreUtils;
  * Contiene los metodos para enviar el header y el footer de la lista de jugadores.
  * 
  * @author PedroJM96
- * @version 1.3 18-08-2022
+ * @version 1.5 05-09-2022
  *
  */
 public class CorePlayerListHeaderFooter {
@@ -43,36 +43,14 @@ public class CorePlayerListHeaderFooter {
 	    		sendPos1_13_1(player,header,footer);
 	    	}else {
 	    		player.setPlayerListHeaderFooter(header, footer);
-	    		
-	    		
 	    	}
 		}
 		catch (Exception ex)
 		{
 			System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
 			ex.printStackTrace();
-		}
-		
-		
+		}	
 	}
-	/*
-	 * Si se encuentra en una version de minecraft superior o igual  a la 1.17
-	 
-	private static void sendPos1_17(Player player, String header, String footer) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
-		Class<?> chat = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent");
-    	Object tabheader = chat.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + header + "\"}" );
-    	Object tabfooter = chat.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + footer + "\"}" );
-    	Constructor<?> constructor = CoreReflection.getClass("net.minecraft.network.protocol.game.PacketPlayOutPlayerListHeaderFooter").getConstructor(new Class[0]);
-    	Object packet = constructor.newInstance(new Object[0]);
-    	CoreReflection.getClass("net.minecraft.network.protocol.game.PacketPlayOutPlayerListHeaderFooter");
-    	Field aField = packet.getClass().getDeclaredField("a");
-        aField.setAccessible(true);
-        aField.set(packet, tabheader);
-        Field bField = packet.getClass().getDeclaredField("b");
-        bField.setAccessible(true);
-        bField.set(packet, tabfooter);;
-        CoreReflection.sendPacket(player, packet);
-	}*/
 	/*
 	 * Si se encuentra en una version de minecraft inferior a la 1.13.1.
 	 */
@@ -89,11 +67,8 @@ public class CorePlayerListHeaderFooter {
         Field bField = packet.getClass().getDeclaredField("b");
         bField.setAccessible(true);
         bField.set(packet, tabfooter);
-        
         CoreReflection.sendPacket(player, packet);
 	}
-	
-	
 	/*
 	 * Si se encuentra en una version de minecraft superior o igual  a la 1.13.1.
 	 */
@@ -110,7 +85,6 @@ public class CorePlayerListHeaderFooter {
         Field bField = packet.getClass().getDeclaredField("footer");
         bField.setAccessible(true);
         bField.set(packet, tabfooter);
-        
         CoreReflection.sendPacket(player, packet);
 	}
 	

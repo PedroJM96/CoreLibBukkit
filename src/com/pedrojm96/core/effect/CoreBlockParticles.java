@@ -17,14 +17,11 @@ import xyz.xenondevs.particle.ParticleEffect;
  * Contiene los metodos para colocar particulas a los bloques en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.1 24-07-2019
+ * @version 1.2 05-09-2022
  *
  */
 public class CoreBlockParticles {
 	
-	
-	
-
 	private static class PlayCircle extends BukkitRunnable{
 		
 		private ArrayList<Location> locations;
@@ -33,7 +30,6 @@ public class CoreBlockParticles {
 		private World world;
 		private int ronda = 0; 
 		private boolean old = false;
-		
 		
 		public PlayCircle(ArrayList<Location> locations,ParticleEffect effect) {
 			this.locations = locations;
@@ -48,9 +44,6 @@ public class CoreBlockParticles {
 	      this.world = ((Location)locations.get(0)).getWorld();
 	      old = true;
 	    }
-		
-		
-		
 
 		@Override
 		public void run() {
@@ -64,28 +57,17 @@ public class CoreBlockParticles {
 			if(ronda >= this.locations.size()) {
 				ronda = 0;
 			}
-			
 		}	
 	}
-	
-	
-	
+
 	public static Integer playCircle(Location center, double radius, int amount,ParticleEffect effect,JavaPlugin plugin) {
 		ArrayList<Location> locations = CoreUtils.getCircleLocation(center, radius, amount);
 		return new PlayCircle(locations,effect).runTaskTimer(plugin, 0L, 3L).getTaskId();
 	}
-	
+
 	public static Integer playCircle(Location center, double radius, int amount, Effect effect, JavaPlugin plugin)
-	  {
+	{
 	    ArrayList<Location> locations = CoreUtils.getCircleLocation(center, radius, amount);
 	    return Integer.valueOf(new PlayCircle(locations, effect).runTaskTimer(plugin, 0L, 3L).getTaskId());
-	  }
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 }

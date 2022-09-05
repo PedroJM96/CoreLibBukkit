@@ -193,7 +193,7 @@ public enum  CoreMaterial2 {
 	}
 	
 	public boolean like(Material material, int data) {
-		if(CoreUtils.isPre1_13()) {
+		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
 			return (this.getMaterial() == material && this.getData() == data);
 		}
 		return this.getMaterial() == material;	

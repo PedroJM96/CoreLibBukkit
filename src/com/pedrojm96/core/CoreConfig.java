@@ -28,7 +28,7 @@ import com.google.common.io.CharStreams;
  * Facilita la creacion de configuracion en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.5 14-06-2020
+ * @version 1.6 5-09-2022
  *
  */
 public class CoreConfig {
@@ -36,9 +36,7 @@ public class CoreConfig {
 	private File file;
 	private String configFileName;
 	private String header;
-	
 	private CoreLog log;
-	
 	public CoreConfig(JavaPlugin plugin,String configfile,CoreLog log,InputStream dafaultData,boolean update){
 		try {
 			Validate.notNull(plugin);
@@ -59,29 +57,17 @@ public class CoreConfig {
 			plugin.getDataFolder().mkdirs();
 		}
 		String inpu = getInputStreamToString(dafaultData);
-		
-	
 		YamlConfiguration defaultConfig = new YamlConfiguration();
 		byte[] bytes = StringUtils.getBytesUtf8(inpu);
-		
-		
-		
-			String utf8EncodedString = StringUtils.newStringUtf8(bytes);
-			try {
-				defaultConfig.loadFromString(utf8EncodedString);
-			} catch (InvalidConfigurationException e) {
-				log.fatalError("Error on loaded default config for "+this.configFileName+".yml.");
-				log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
-				e.printStackTrace();
-				plugin.getServer().getPluginManager().disablePlugin(plugin);
-			}
-		
-		
-		
-		
-		
-		
-
+		String utf8EncodedString = StringUtils.newStringUtf8(bytes);
+		try {
+			defaultConfig.loadFromString(utf8EncodedString);
+		} catch (InvalidConfigurationException e) {
+			log.fatalError("Error on loaded default config for "+this.configFileName+".yml.");
+			log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
+			e.printStackTrace();
+			plugin.getServer().getPluginManager().disablePlugin(plugin);
+		}
 		String[] inpuArray = inpu.split("\n");
 		String header = "";
 		for(int i = 0 ; i<inpuArray.length ; i++) {
@@ -92,29 +78,22 @@ public class CoreConfig {
 			}
 		}
 		this.header = header;
-		
-		
-		
 		if (this.exists()){
 			this.load();
 			if(update) {
 				for(String nodo : defaultConfig.getKeys(true)) {
 					this.add(nodo, defaultConfig.get(nodo));
 				}
-				//this.header(defaultConfig.options().header());
 				this.silenSave();
 			}
 		}else{
-			
-				for(String nodo : defaultConfig.getKeys(true)) {
-					this.add(nodo, defaultConfig.get(nodo));
-				}
-			
-			//this.header(defaultConfig.options().header());
+			for(String nodo : defaultConfig.getKeys(true)) {
+				this.add(nodo, defaultConfig.get(nodo));
+			}
 			this.create();
 		}
 	}
-
+	
 	private String getInputStreamToString(InputStream dataIn) {
 		String result ="";
 		try {
@@ -126,35 +105,31 @@ public class CoreConfig {
 		}
 		return result;
 	}
-	public boolean exists(){
+	
+	private boolean exists(){
 		if(file.exists()){
 			return true;
 		}else{
 			return false;
 		}
 	}
+	
 	public String getYMLtoString(){
 		return config.saveToString();
 	}
+	
 	public void save(){
-		
         try{
-        	
             String filestring = config.saveToString();
-             
             String[] inpuArray = filestring.split("\n");
      		String configStringLimpia = "";
      		for(int i = 0 ; i<inpuArray.length ; i++) {
-     			
      			if(inpuArray[i].trim().startsWith("#")) {
-     				
      				continue;
      			}else {
-     				
      				configStringLimpia = configStringLimpia+"\n" +inpuArray[i];
      			}
      		}
-             
      		Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Charset.forName("UTF-8")));
      		fileWriter.write(this.header+configStringLimpia);
             fileWriter.close();
@@ -166,25 +141,19 @@ public class CoreConfig {
         	e.printStackTrace();
         }
 	}
+	
 	public void silenSave(){
-		
         try{
         	String filestring = config.saveToString();
-            
             String[] inpuArray = filestring.split("\n");
      		String configStringLimpia = "";
-     		
      		for(int i = 0 ; i<inpuArray.length ; i++) {
-     			
      			if(inpuArray[i].trim().startsWith("#")) {
-     				
      				continue;
      			}else {
-     				
      				configStringLimpia = configStringLimpia+"\n" +inpuArray[i];
      			}
-     		}
-             
+     		} 
      		Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Charset.forName("UTF-8")));
      		fileWriter.write(this.header+configStringLimpia);
             fileWriter.close();
@@ -195,6 +164,7 @@ public class CoreConfig {
         	e.printStackTrace();
         }
     }
+	
 	public void load(){
 		log.info("Load "+this.configFileName+".yml");
 		try {
@@ -207,6 +177,7 @@ public class CoreConfig {
 			e.printStackTrace();
 		}
 	}
+	
 	public CoreConfig loadFromString(String text){
 		try {
 			config.loadFromString(text);
@@ -219,28 +190,21 @@ public class CoreConfig {
 			return null;
 		}
 	}
-	public void create(){
-		
-		
+	
+	private void create(){
 		log.alert("The "+this.configFileName+".yml file does not exist yet.");
 		log.info("Creating and loading file "+this.configFileName+".yml.");
         try{
         	String filestring = config.saveToString();
-            
             String[] inpuArray = filestring.split("\n");
      		String configStringLimpia = "";
-
      		for(int i = 0 ; i<inpuArray.length ; i++) {
-     			
      			if(inpuArray[i].trim().startsWith("#")) {
-     				
      				continue;
      			}else {
-     				
      				configStringLimpia = configStringLimpia+"\n" +inpuArray[i];
      			}
      		}
-             
      		Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Charset.forName("UTF-8")));
      		fileWriter.write(this.header+configStringLimpia);
             fileWriter.close();
@@ -252,78 +216,73 @@ public class CoreConfig {
             e.printStackTrace();
         }
     }
-	@SuppressWarnings("unused")
-	private void create(String data){
-		String configTex = data;
-		
-		log.alert("The "+this.configFileName+".yml file does not exist yet.");
-		log.info("Creating and loading file "+this.configFileName+".yml.");
-        try{
-            Writer fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), Charset.forName("UTF-8")));
-            fileWriter.write(configTex);
-            
-            fileWriter.close();
-            log.alert(this.configFileName+".yml  create.");
-        }
-        catch(IOException e){
-        	log.fatalError("Error on create "+this.configFileName+".yml."); 
-        	log.fatalError("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
-        	e.printStackTrace();
-        }
-    }
+	
 	public void add(String path,String value){
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path,long value){
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path,boolean value){
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path,List<String> value){
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path,int value){
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path, double value) {
 		if(!config.isSet(path)) {
 			config.set(path,value);
 		}
 	}
+	
 	public void add(String path, Object value) {
 		if(!config.isSet(path)) {
 			config.set(path, value);
 		}
 	}
+	
 	public boolean getBoolean(String path){
 		return config.getBoolean(path);
 	}
+	
 	public String getString(String path){
 		return config.getString(path);
 	}
+	
 	public int getInt(String path){
 		return config.getInt(path);
 	}
+	
 	public long getLong(String path){
 		return config.getLong(path);
 	}
+	
 	public List<String> getStringList(String path){
 		return config.getStringList(path);
 	}
+	
 	public ConfigurationSection getConfigurationSection(String path){
 		return config.getConfigurationSection(path);
 	}
+	
 	public Double getDouble(String path){
 		return config.getDouble(path);
 	}
@@ -335,12 +294,15 @@ public class CoreConfig {
 	public Set<String> getKeys(Boolean bo){
 		return config.getKeys(bo);
 	}
+	
 	public void set(String path,String value){
 		 config.set(path, value);
 	}
+	
 	public void setNull(String path){
 		 config.set(path, null);
 	}
+	
 	public void set(String path,double value){
 		 config.set(path, value);
 	}
@@ -352,12 +314,15 @@ public class CoreConfig {
 	public void set(String path, List<String> value) {
 		config.set(path, value);
 	}
+	
 	public void set(String path,int value){
 		 config.set(path, value);
 	}
+	
 	public void set(String path,boolean value){
 		 config.set(path, value);
 	}
+	
 	public boolean isSet(String path){
 		return config.isSet(path);
 	}
@@ -369,6 +334,7 @@ public class CoreConfig {
 	public boolean contains(String path){
 		 return config.contains(path);
 	}
+	
 	@SuppressWarnings("deprecation")
 	public void header(String h) {
 		config.options().header(h);

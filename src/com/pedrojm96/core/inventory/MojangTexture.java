@@ -13,9 +13,16 @@ import com.mojang.authlib.properties.Property;
 import com.pedrojm96.core.CoreLog;
 import com.pedrojm96.core.CoreUtils;
 
+
+/**
+ * Para manejar las texturas minecraft implementando la api de bukkt/spigot.
+ * 
+ * @author PedroJM96
+ * @version 1.4 05-09-2022
+ *
+ */
 public class MojangTexture extends BukkitRunnable {
 	 
-	
 	 private SkullMeta skullMeta;
 	 private ItemStack itemStack;
 	 private CoreLog log;

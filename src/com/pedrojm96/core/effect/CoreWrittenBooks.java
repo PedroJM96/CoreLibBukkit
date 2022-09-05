@@ -17,17 +17,14 @@ import com.pedrojm96.core.CoreVariables;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 
-
-
 /**
  * Contiene los metodos para enviar libros escritos  a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.1 19-08-2022
+ * @version 1.2 05-09-2022
  *
  */
 public class CoreWrittenBooks {
-
 	/**
 	 * 
 	 * @param player El Jugador al que se enviaran el libro.
@@ -45,8 +42,7 @@ public class CoreWrittenBooks {
 			send_1_14_4(player,pages,title,name,give);
 		}	
 	}
-	
-	
+
 	private static void send_1_12_2(Player player, List<String> pages, String title, String name, boolean give)
 	{
 		int slot = player.getInventory().getHeldItemSlot();
@@ -56,11 +52,9 @@ public class CoreWrittenBooks {
 	    	ByteBuf buf = Unpooled.buffer(256);
 	        buf.setByte(0, (byte)0);
 	        buf.writerIndex(1);
-	    	
 	        Class<?> PacketDataSerializerClass = CoreReflection.getNMSClass("PacketDataSerializer");
 	        Constructor<?> PacketDataSerializerConstructor = PacketDataSerializerClass.getConstructor(ByteBuf.class);
 	        Object PacketDataSerializerObj = PacketDataSerializerConstructor.newInstance(buf);
-	        
 	        Class<?> PacketPlayOutCustomPayloadClass = CoreReflection.getNMSClass("PacketPlayOutCustomPayload");
 	        Constructor<?> PacketPlayOutCustomPayloadConstructor = PacketPlayOutCustomPayloadClass.getConstructor(String.class,PacketDataSerializerClass);
 	        Object packet = PacketPlayOutCustomPayloadConstructor.newInstance("MC|BOpen",PacketDataSerializerObj);
@@ -80,12 +74,8 @@ public class CoreWrittenBooks {
 	    		player.getInventory().setItem(slot, new ItemStack(Material.AIR));
 	    	}else {
 	    		player.getInventory().setItem(slot, old);
-	    	}
-	    	
-	    	
+	    	}	
 	    }
-	    
-	   
 	}
 	
 	private static void send_1_14_4(Player player, List<String> pages, String title, String name, boolean give)
@@ -94,7 +84,6 @@ public class CoreWrittenBooks {
 	    ItemStack old = player.getInventory().getItem(slot);
 	    player.getInventory().setItem(slot, getBook(player, pages, title, name));
 	    player.openBook(getBook(player, pages, title, name));
-	    
 	    if(give) {
 	    	if(old!=null) {
 	    		 player.getInventory().addItem(old);
@@ -105,13 +94,8 @@ public class CoreWrittenBooks {
 	    	}else {
 	    		player.getInventory().setItem(slot, old);
 	    	}
-	    	
-	    	
 	    }
-	  
 	}
-	
-	
 	
 	private static void send_1_13(Player player, List<String> pages, String title, String name, boolean give)
 	{
@@ -122,21 +106,16 @@ public class CoreWrittenBooks {
 	    	ByteBuf buf = Unpooled.buffer(256);
 	        buf.setByte(0, (byte)0);
 	        buf.writerIndex(1);
-	    	
-	        
 	        Class<?> MinecraftKeyClass = CoreReflection.getNMSClass("MinecraftKey");
 	        Constructor<?> MinecraftKeyConstructor = MinecraftKeyClass.getConstructor(String.class);
 	        Object MinecraftKeyObj = MinecraftKeyConstructor.newInstance("minecraft:book_open");
-	        
 	        Class<?> PacketDataSerializerClass = CoreReflection.getNMSClass("PacketDataSerializer");
 	        Constructor<?> PacketDataSerializerConstructor = PacketDataSerializerClass.getConstructor(ByteBuf.class);
 	        Object PacketDataSerializerObj = PacketDataSerializerConstructor.newInstance(buf);
-	        
 	        Class<?> PacketPlayOutCustomPayloadClass = CoreReflection.getNMSClass("PacketPlayOutCustomPayload");
 	        Constructor<?> PacketPlayOutCustomPayloadConstructor = PacketPlayOutCustomPayloadClass.getConstructor(MinecraftKeyClass,PacketDataSerializerClass);
 	        Object packet = PacketPlayOutCustomPayloadConstructor.newInstance(MinecraftKeyObj,PacketDataSerializerObj);
 	        CoreReflection.sendPacket(player, packet);
-	        
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    } 
@@ -150,8 +129,6 @@ public class CoreWrittenBooks {
 	    	}else {
 	    		player.getInventory().setItem(slot, old);
 	    	}
-	    	
-	    	
 	    }
 	}
 	
@@ -165,15 +142,11 @@ public class CoreWrittenBooks {
 	    	ByteBuf buf = Unpooled.buffer(256);
 	        buf.setByte(0, (byte)0);
 	        buf.writerIndex(1);
-	    	
-	        
 	        Class<?> EnumHandClass = CoreReflection.getNMSClass("EnumHand");
-	       
 	        Class<?> PacketPlayOutOpenBookClass = CoreReflection.getNMSClass("PacketPlayOutOpenBook");
 	        Constructor<?> PacketPlayOutOpenBookConstructor = PacketPlayOutOpenBookClass.getConstructor(EnumHandClass);
 	        Object packet = PacketPlayOutOpenBookConstructor.newInstance(EnumHandClass.getField("MAIN_HAND").get(null));
 	        CoreReflection.sendPacket(player, packet);
-	        
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    } 
@@ -187,8 +160,6 @@ public class CoreWrittenBooks {
 	    	}else {
 	    		player.getInventory().setItem(slot, old);
 	    	}
-	    	
-	    	
 	    }
 	}
 	
@@ -200,9 +171,7 @@ public class CoreWrittenBooks {
 	    if (meta == null) {
 	    	return null; 
 	    }
-	      
 	    List<String> coloredPages = new ArrayList<>();
-	    
 	    for (String page : pages) {
 	    	page = CoreVariables.replace(page, player);
 	    	coloredPages.add(page);
@@ -214,8 +183,4 @@ public class CoreWrittenBooks {
 	    book.setItemMeta(meta);
 	    return book;
 	  }
-	
-	
-	
-	
 }

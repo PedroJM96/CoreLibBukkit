@@ -8,6 +8,15 @@ import com.pedrojm96.core.CorePlugin;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+
+
+/**
+ * Facilita la creacion de la conexion a la base de datos mysql.
+ * 
+ * @author PedroJM96
+ * @version 1.1 05-09-2022
+ *
+ */
 public class CoreMySQLConnection {
 
 	private CoreLog log;
@@ -18,7 +27,6 @@ public class CoreMySQLConnection {
 	
 	public CoreMySQLConnection(CorePlugin plugin,String host,int port,String database,String username,String password,boolean useSSL) {
 		this.log = plugin.getLog();
-
 		this.log.info("Data set to MySQL");
 		this.host = host;
 		if((this.host==null)||(this.host.equals(""))){
@@ -37,9 +45,7 @@ public class CoreMySQLConnection {
 		if((this.password==null)||(this.password.equals(""))){
 			this.log.alert("DMYSQL() - password nulo");
 		}
-		
 		this.useSSL = useSSL;
-		
 		HikariConfig config = new HikariConfig();
 		config.setPoolName(plugin.getInstance().getName()+"-MySQLPool");
 		config.setJdbcUrl("jdbc:mysql://"+this.host+":"+this.port+"/"+this.database+"?useSSL="+(this.useSSL?"true":"false")  );
@@ -76,9 +82,7 @@ public class CoreMySQLConnection {
 		dataSource.close();
 	}
 	
-	
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
-	
 }

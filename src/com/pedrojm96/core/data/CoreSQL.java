@@ -10,44 +10,27 @@ import java.util.List;
  * Implementacion para facilitar la creacion de base de datos.
  * 
  * @author PedroJM96
- * @version 1.3 02-01-2020
+ * @version 1.4 05-09-2022
  *
  */
 public abstract interface CoreSQL {
 	public abstract boolean checkStorage();
-	
 	public Connection getConnection() throws SQLException;
-	
 	public abstract void build(String ...args);
-	
-
-	
 	public abstract void insert(String ...args);
-	
-	
 	public abstract void table(String table);
-	
-	
 	public abstract void executeUpdate(String query);
-	
 	public abstract void update(CoreWHERE paranWhere,String ...args);
 	public abstract void update(String ...args);
-	
 	public abstract void delete(CoreWHERE paranWhere);
-	
 	public abstract boolean columnExists(String columnname);
 	public abstract String getColumnType(String columnname);
-	
 	public abstract void changeColumnType(String columnname,String columntype);
-	
 	public abstract void addColumn(String columnname,String columntype);
-	
 	public abstract String get(CoreWHERE paranWhere,String paranString);
-	
 	public abstract HashMap<String, String> get(CoreWHERE paranWhere,String... paranString);
 	public abstract List<HashMap<String, String>> getAll(CoreWHERE paranWhere, String criterio, String... paranString);
 	public abstract List<HashMap<String, String>> getAll(String criterio, String... paranString);
-	
 	public abstract boolean checkData(CoreWHERE paranWhere,String paranString);
 	
 	public static CoreWHERE WHERE(String ...args) {
@@ -55,10 +38,8 @@ public abstract interface CoreSQL {
 	}
 	
 	public abstract void close();
-	
-	
+
 	public static CoreField FIELD(String name, String type, Class<?> classtype) {
 		return new CoreField(name, type, classtype);
 	}
-	
 }

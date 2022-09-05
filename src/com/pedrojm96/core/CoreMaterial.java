@@ -2,20 +2,18 @@ package com.pedrojm96.core;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.bukkit.Bukkit;
+
 import org.bukkit.Material;
 
+/**
+ * Contiene los metodos para usar los materiales que sean compatible en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
+ * 
+ * @author PedroJM96
+ * @version 1.1 5-09-2022
+ *
+ */
 public class CoreMaterial {
-  static boolean mc18 = Bukkit.getBukkitVersion().split("-")[0].contains("1.8");
-  
-  static boolean mc19 = Bukkit.getBukkitVersion().split("-")[0].contains("1.9");
-  
-  static boolean mc110 = Bukkit.getBukkitVersion().split("-")[0].contains("1.10");
-  
-  static boolean mc111 = Bukkit.getBukkitVersion().split("-")[0].contains("1.11");
-  
-  static boolean mc112 = Bukkit.getBukkitVersion().split("-")[0].contains("1.12");
-  
+ 
   public enum pre113 {
     AIR("AIR", "LEGACY_AIR"),
     STONE("STONE", "LEGACY_STONE"),
@@ -491,7 +489,7 @@ public class CoreMaterial {
     }
     
     public Material get() {
-      if (CoreMaterial.mc18 || CoreMaterial.mc19 || CoreMaterial.mc110 || CoreMaterial.mc111 || CoreMaterial.mc112)
+      if (CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x))
         return Material.getMaterial(this.pre113); 
       return Material.getMaterial(this.pos113);
     }
@@ -1431,8 +1429,9 @@ public class CoreMaterial {
   }
   
   public static Material getMaterial(int id) {
-    if (mc18 || mc19 || mc110 || mc111 || mc112)
-      return Material.getMaterial(idpre113.get(Integer.valueOf(id))); 
+    if (CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+    	 return Material.getMaterial(idpre113.get(Integer.valueOf(id))); 
+    }
     return Material.getMaterial(idpos113.get(Integer.valueOf(id)));
   }
 }

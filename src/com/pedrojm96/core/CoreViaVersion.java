@@ -14,7 +14,7 @@ import com.viaversion.viaversion.api.ViaAPI;
  * Utilidades para el plugin ViaVersion.
  * 
  * @author PedroJM96
- * @version 1.4 22-08-2022
+ * @version 1.5 05-09-2022
  *
  */
 public class CoreViaVersion {
@@ -23,17 +23,14 @@ public class CoreViaVersion {
 	private static ViaAPI viaApi = null;
 	
 	public static boolean Setup() {
-		
 		if(viaApi!=null) {
 			return true;
 		}
-		
 		if (Bukkit.getPluginManager().getPlugin("ViaVersion") == null) {
 			return false;
 	    }
 	    viaApi = Via.getAPI();
 		return true;
-		
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -226,6 +223,4 @@ public class CoreViaVersion {
 	    }
 		return retorno;
 	}
-	
-	
 }

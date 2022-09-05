@@ -32,14 +32,12 @@ import com.mojang.authlib.properties.Property;
  * Utilidades para el core.
  * 
  * @author PedroJM96
- * @version 1.7 22-08-2022
+ * @version 1.8 05-09-2022
  *
  */
 public class CoreUtils {
 	
-	
 	public enum Version{
-		
 		v1_5(10500),
 		v1_6(10600),
 		v1_7(10700),
@@ -98,7 +96,6 @@ public class CoreUtils {
 		vUnsupported(1000000);
 		
 		private int value;
-		
 		private boolean contains;
 		private boolean equals;
 		
@@ -127,8 +124,7 @@ public class CoreUtils {
 		public boolean esMayorr(Version v) {
 			return (this.getValue() > v.getValue());
 		}
-		
-		
+
 		public boolean esMayorIgual(Version v) {
 			return (this.getValue() >= v.getValue());
 		}
@@ -141,9 +137,7 @@ public class CoreUtils {
 			return (this.getValue() <= v.getValue());
 		}
 		
-		
 		public static Version getVersion() {
-			
 			Version retorno = Version.vUnsupported;
 			for(Version version : Version.values()) {
 				if(version.IsEquals()) {
@@ -156,22 +150,8 @@ public class CoreUtils {
 	
 	}
 	
-	
-	
-	
-	public static boolean mc1_7 = Bukkit.getBukkitVersion().split("-")[0].contains("1.7");
-	public static boolean mc1_8 = Bukkit.getBukkitVersion().split("-")[0].contains("1.8");
-	public static boolean mc1_9 = Bukkit.getBukkitVersion().split("-")[0].contains("1.9");
-	public static boolean mc1_10 = Bukkit.getBukkitVersion().split("-")[0].contains("1.10");
-	public static boolean mc1_11 = Bukkit.getBukkitVersion().split("-")[0].contains("1.11");
-	public static boolean mc1_12 = Bukkit.getBukkitVersion().split("-")[0].contains("1.12");
-	public static boolean mc1_13 = Bukkit.getBukkitVersion().split("-")[0].contains("1.13");
-	public static boolean mc1_13_0 = Bukkit.getBukkitVersion().split("-")[0].equalsIgnoreCase("1.13");
-	public static boolean mc1_13_1 = Bukkit.getBukkitVersion().split("-")[0].contains("1.13.1");
-	
 	public static Map<String, String[]> playerTexturesCache =  new HashMap<String, String[]>();
-	
-	
+
 	public static String[] getPlayerTextureLocal(Player playerBukkit , CoreLog log) {
 		String[] a = null;
 		Class<?> strClass = (Class<?>) CoreReflection.getCraftClass("entity.CraftPlayer");
@@ -190,6 +170,7 @@ public class CoreUtils {
 		return a;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static String[] getTextureFromMojang(String name,CoreLog log) {
         try {
         	if(playerTexturesCache.containsKey(name)) {
@@ -224,7 +205,6 @@ public class CoreUtils {
 		catch(NumberFormatException er){
 			return false;
 		}
-		
 	}
 	
 	public static boolean isint(String s){
@@ -259,8 +239,6 @@ public class CoreUtils {
 		}	
 	}
 	
-	
-	
 	public static long toLong(String s){
 		try{
 			
@@ -270,7 +248,6 @@ public class CoreUtils {
 		catch(NumberFormatException er){
 			return 0;
 		}
-		
 	}
 	
 	public static boolean isEnum(Class<?> class1, String value ) {
@@ -281,9 +258,7 @@ public class CoreUtils {
 		}catch(IllegalArgumentException ex){
 			return false;
 		}
-		
 	}
-	
 	
 	public static boolean isinteger(String s){
 		try{
@@ -294,7 +269,6 @@ public class CoreUtils {
 		catch(NumberFormatException er){
 			return false;
 		}
-		
 	}
 	public static Integer integerValue(String s){
 		try{
@@ -304,7 +278,6 @@ public class CoreUtils {
 		catch(NumberFormatException er){
 			return 0;
 		}
-		
 	}
 	
 	public static Double doubleValue(String s){
@@ -315,7 +288,6 @@ public class CoreUtils {
 		catch(NumberFormatException er){
 			return 0.0;
 		}
-		
 	}
 	
 	 public  static String formatime(long segundos){
@@ -386,7 +358,6 @@ public class CoreUtils {
 			return forma;
 	    }
 	 
-	 
 	 public static String timeLeft(int timeoutSeconds)
 	 {
 	     int days = (int) (timeoutSeconds / 86400);
@@ -397,8 +368,6 @@ public class CoreUtils {
 	             + (minutes > 0 ? " " + minutes + " m"  : "") + (seconds > 0 ? " " + seconds + " s"  : "");
 	 }
 	 
-	
-	
 	public static ArrayList<Location> getCircleLocation(Location center, double radius, int amount){
         World world = center.getWorld();
         double increment = (2*Math.PI)/amount;
@@ -412,6 +381,7 @@ public class CoreUtils {
         return locations;
     }
 	
+	@SuppressWarnings("deprecation")
 	public static List<String> jsonArrayStringToList(String json) {
 		JsonArray jsonArry = new JsonParser().parse(json).getAsJsonArray();
 		Type listType = new TypeToken<List<String>>() {}.getType();
@@ -426,15 +396,7 @@ public class CoreUtils {
 		}
 		return ss.toString();
 	}
-	public static boolean isPre1_13() {
-		
-		if(mc1_8 || mc1_9 || mc1_10 || mc1_11 || mc1_12) {
-			return true;
-		}else {
-			return  false;
-		}
-	}
-	
+
 	@SuppressWarnings("deprecation")
 	public static ItemStack createItem(Player player,String name,List<String> lore,int id,int shrt) {
 		ItemStack item = new ItemStack(CoreMaterial.getMaterial(id),1,(short)shrt);
@@ -445,8 +407,6 @@ public class CoreUtils {
 		return item;
 	}
 	
-	
-
 	@SuppressWarnings("deprecation")
 	public static ItemStack createItem(String name,List<String> lore,int id,int shrt) {
 		ItemStack item = new ItemStack(CoreMaterial.getMaterial(id),1,(short)shrt);
@@ -456,7 +416,6 @@ public class CoreUtils {
 		item.setItemMeta(itemMeta);
 		return item;
 	}
-	
 	
 	@SuppressWarnings("deprecation")
 	public static ItemStack createItem(String name,List<String> lore,Material mate,int shrt) {
@@ -478,7 +437,6 @@ public class CoreUtils {
 		return item;
 	}
 	
-
 	@SuppressWarnings("deprecation")
 	public static ItemStack createItem(String name,int mate,int shrt) {
 		ItemStack item = new ItemStack(CoreMaterial.getMaterial(mate),1,(short)shrt);
@@ -487,26 +445,20 @@ public class CoreUtils {
 		item.setItemMeta(itemMeta);
 		return item;
 	}
-	
-	
 	/**
      * Attempt to translate a player name into a UUID.
      * @param name - Player name.
      * @return Player UUID. Null if no match found.
      */
-    public static UUID translateNameToUUID(String name, CorePlugin plugin) {
+    @SuppressWarnings("deprecation")
+	public static UUID translateNameToUUID(String name, CorePlugin plugin) {
         UUID id = null;
         plugin.getLog().debug("translateNameToUUID(" + name + ")");
-        
-
         if(name == null) {
         	plugin.getLog().debug("translateNameToUUID() - bad ID");
         	return id;
         }
-
         plugin.getLog().debug("translateNameToUUID() - Looking through online players: " + Bukkit.getServer().getOnlinePlayers().size());
-        
-
         Collection<? extends Player> players = Bukkit.getServer().getOnlinePlayers();
         for(Player p : players) {
             if(p.getName().equalsIgnoreCase(name)) {
@@ -515,11 +467,8 @@ public class CoreUtils {
                 break;
             }
         }
-
-        // Last resort, attempt bukkit api lookup
         if(id == null && Bukkit.getServer().getOnlineMode()) {
         	plugin.getLog().debug("translateNameToUUID() - Attempting online lookup");
-        	
         	UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(name));
         	try {
 				Map<String, UUID> map = fetcher.call();
