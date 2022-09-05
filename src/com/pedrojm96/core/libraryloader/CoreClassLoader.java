@@ -107,7 +107,7 @@ public class CoreClassLoader extends URLClassLoader {
         // on posix systems by default this is only read/writable by the process owner
         Path path;
         try {
-            path = Files.createTempFile("luckperms-jarinjar", ".jar.tmp");
+            path = Files.createTempFile("coreplugin-jarinjar", ".jar.tmp");
         } catch (IOException e) {
         	log.error("Unable to create a temporary file to plugin bootstrap", e);
         	return null;

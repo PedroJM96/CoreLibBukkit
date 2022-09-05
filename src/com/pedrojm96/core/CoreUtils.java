@@ -491,6 +491,26 @@ public class CoreUtils {
         return id;
     }
 	
-	
-	
+    
+    public static Material getMaterial(String mate) {
+    		try {
+                  return Material.valueOf(mate);
+            } catch (IllegalArgumentException ignore2) {
+                // try next
+            	return Material.AIR;
+            } 
+    }
+    
+    
+     public static boolean isMaterial(Material material,String... mates) {
+    	for(int i =0; i<mates.length;i++) {
+    		 String mate = mates[i].trim();
+    		 if(material == getMaterial(mate)) {
+     			return true;
+     		 }else {
+     			continue;
+     		 }
+    	}
+    	return false;
+    }
 }
