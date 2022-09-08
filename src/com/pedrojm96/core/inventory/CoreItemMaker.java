@@ -18,6 +18,7 @@ import com.mojang.authlib.properties.Property;
 import com.pedrojm96.core.CorePlugin;
 import com.pedrojm96.core.CoreUtils;
 import com.pedrojm96.core.CoreVariables;
+import com.pedrojm96.core.CoreVersion;
 
 /**
  * Contiene los metodos para crear item en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -51,7 +52,7 @@ public class CoreItemMaker {
 			 item.setDurability(this.data.shortValue());
 		 }
 		 Material checkMaterial = null;
-		 if(CoreUtils.Version.getVersion().esMayorIgual(CoreUtils.Version.v1_13)) {
+		 if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_13)) {
 			 checkMaterial = Material.getMaterial("PLAYER_HEAD");
 			 this.data = 3;
 		 }else {
@@ -89,7 +90,7 @@ public class CoreItemMaker {
 			 item.setDurability(this.data.shortValue());
 		 }
 		 Material checkMaterial = null;
-		 if(CoreUtils.Version.getVersion().esMayorIgual(CoreUtils.Version.v1_13)) {
+		 if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_13)) {
 			 checkMaterial = Material.getMaterial("PLAYER_HEAD");
 			 this.data = 3;
 		 }else {

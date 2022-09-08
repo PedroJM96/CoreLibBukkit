@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.bukkit.entity.Player;
 
 import com.pedrojm96.core.CoreReflection;
-import com.pedrojm96.core.CoreUtils;
+import com.pedrojm96.core.CoreVersion;
 
 
 /**
@@ -37,9 +37,9 @@ public class CorePlayerListHeaderFooter {
 	public static void sendHeaderFooter(Player player, String header, String footer) {
 		try
 		{
-	    	if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_13) ) {
+	    	if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_13) ) {
 	    		sendPre1_13_1(player,header,footer);
-	    	}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_16_x) ){
+	    	}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_16_x) ){
 	    		sendPos1_13_1(player,header,footer);
 	    	}else {
 	    		player.setPlayerListHeaderFooter(header, footer);

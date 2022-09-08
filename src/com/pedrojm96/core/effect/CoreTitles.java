@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreReflection;
-import com.pedrojm96.core.CoreUtils;
+import com.pedrojm96.core.CoreVersion;
 
 /**
  * Contiene los metodos para enviar titulos y sutitulos a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -57,7 +57,7 @@ public class CoreTitles {
 	 */
 	public static void sendTitles(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle)
 	{
-		if(CoreUtils.Version.getVersion().esMayorIgual(CoreUtils.Version.v1_17)) {
+		if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_17)) {
 			 player.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
 		}else {
 			send(player, fadeIn <= 0 ? 20 : fadeIn , stay <= 0 ? 50 : stay ,fadeOut <= 0 ? 10 : fadeOut , CoreColor.colorCodes(title), CoreColor.colorCodes(subtitle));

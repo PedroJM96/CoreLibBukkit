@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import com.pedrojm96.core.CoreColor;
-import com.pedrojm96.core.CoreUtils;
+import com.pedrojm96.core.CoreVersion;
 
 /**
  * Contiene los metodos para enviar mensajes BossBar a los jugadores en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -55,7 +55,7 @@ public class CoreBossBar {
 		if (hasSendBar(player)) {
 			removeSendBar(player);
 		}
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_8_8)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_8_8)) {
 			sendPre1_9(player, mensaje, seconds, 0,interval,plugin);
 		}else {
 			sendPos1_9(player, mensaje, color,estilo,seconds,0, interval,plugin);	
@@ -130,9 +130,9 @@ public class CoreBossBar {
 	
 	private static FakeBossBar getBossBar(Plugin plugin, Player player,String name, Color color, Style style,float pro) {
 		FakeBossBar bar = null;
-			if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_8_8)) {
+			if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_8_8)) {
 				bar = new FakeBossBarPre1_9(player,name,pro);
-			}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_16_x)){
+			}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_16_x)){
 				bar = new FakeBossBarPos_1_9(player,name,color,style,pro);
 			}else {
 				bar = new FakeBossBarPos_1_17(plugin, player,name,color,style,pro);

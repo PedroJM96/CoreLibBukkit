@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
  * Contiene los metodos para codificar string con colores y enviar mensajes a los jugadores en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.5 05-09-2022
+ * @version 1.6 08-09-2022
  *
  */
 public class CoreColor {
@@ -23,6 +23,10 @@ public class CoreColor {
 	 * @param nonColoredText El string a colorear.
 	 * @return Devuelve un string coloreado. 
 	 */
+	
+	
+	
+	
 	public static String colorCodes(String nonColoredText) {
 		if(nonColoredText == null){
         	return nonColoredText;
@@ -39,7 +43,11 @@ public class CoreColor {
         if(nonColoredText == " "){
         	return nonColoredText;
         }
-		String coloredText = ChatColor.translateAlternateColorCodes('&', nonColoredText);
+        String coloredText = nonColoredText;
+        if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_16)) {
+        	coloredText = HEXChaColor.colorCodes(coloredText);
+        }
+		coloredText = ChatColor.translateAlternateColorCodes('&', coloredText);
         return coloredText;
     }
 	/**

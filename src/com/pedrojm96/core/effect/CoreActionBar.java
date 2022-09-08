@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreReflection;
-import com.pedrojm96.core.CoreUtils;
+import com.pedrojm96.core.CoreVersion;
 
 
 /**
@@ -70,17 +70,17 @@ public class CoreActionBar {
 		if (!player.isOnline()) {
 			return; // Player may have logged out
 		}
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_11_x)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_11_x)) {
 			sendPre_1_12(player,CoreColor.colorCodes(message));
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_15_x) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_15_x) ){
 			sendPos_1_12_Pre_1_16(player,CoreColor.colorCodes(message));
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_16_x) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_16_x) ){
 			sendPos_1_16_Pre_1_17(player,CoreColor.colorCodes(message));
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_17_x) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_17_x) ){
 			sendPos_1_17_Pre_1_18(player,CoreColor.colorCodes(message));
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_18_x) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_18_x) ){
 			sendPos_1_18_Pre_1_19(player,CoreColor.colorCodes(message));
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_19) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_19) ){
 			sendPos_1_19_Pre_1_19_2(player,CoreColor.colorCodes(message));
 		}else {
 			sendPos_1_19_2(player,CoreColor.colorCodes(message));

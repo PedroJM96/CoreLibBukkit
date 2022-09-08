@@ -17,7 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreMaterial;
 import com.pedrojm96.core.CorePlugin;
-import com.pedrojm96.core.CoreUtils;
+import com.pedrojm96.core.CoreVersion;
 
 
 /**
@@ -49,7 +49,7 @@ public class CoreMenu {
 	
 	public void create(int Row,Player player){
 		slot = getSlot(Row);
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 			this.name = CoreColor.colorCodes(this.name);
 		}else {
 			if(this.name.contains("&k") ) {
@@ -69,7 +69,7 @@ public class CoreMenu {
 		Inventory m= Bukkit.createInventory(null,slot, this.name);
 		if(this.getGlassEnable()) {
 			int color = this.getGlasscolor();
-			if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+			if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 				for (int i = 0; i < slot; i++)
 				{
 					ItemStack it = createItem(" ",160,color);
@@ -156,7 +156,7 @@ public class CoreMenu {
 	
 	public void createFromPlayer(int Row,Player player,OfflinePlayer fromplayer){
 		slot = getSlot(Row);
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 			this.name = CoreColor.colorCodes(this.name);
 		}else {
 			for(String color : CoreColor.getAlternateColorList()) {
@@ -350,7 +350,7 @@ public class CoreMenu {
 				}
 			}else {
 				String mate_data;
-				if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+				if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 					if(nodo.isSet("material-old")) {
 						mate_data = nodo.getString("material-old");
 					}else {

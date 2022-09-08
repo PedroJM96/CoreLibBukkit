@@ -11,8 +11,8 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreReflection;
-import com.pedrojm96.core.CoreUtils;
 import com.pedrojm96.core.CoreVariables;
+import com.pedrojm96.core.CoreVersion;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -32,11 +32,11 @@ public class CoreWrittenBooks {
 	 */
 	public static void sendBook(Player player, List<String> pages, String title, String name, boolean give)
 	{
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 			send_1_12_2(player,pages,title,name,give);
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_13_x) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_13_x) ){
 			send_1_13(player,pages,title,name,give);
-		}else if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_14_2) ){
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_14_2) ){
 			send_1_14(player,pages,title,name,give);
 		}else {
 			send_1_14_4(player,pages,title,name,give);

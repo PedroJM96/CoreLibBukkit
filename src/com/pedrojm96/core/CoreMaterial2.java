@@ -8,8 +8,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.pedrojm96.core.CoreUtils.Version;
-
 
 /**
  * Contiene los metodos para usar los materiales que sean compatible en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -24,82 +22,82 @@ public enum  CoreMaterial2 {
 	/**
 	 * + 1.9
 	 */ 
-	ACACIA_BOAT(447, CoreUtils.Version.v1_9, new MaterialVersions(0,"BOAT_ACACIA"),new MaterialVersions(0,"BOAT")),  
+	ACACIA_BOAT(447, CoreVersion.v1_9, new MaterialVersions(0,"BOAT_ACACIA"),new MaterialVersions(0,"BOAT")),  
 	
 	/**
 	 * + 1.13
 	 */ 
-	ACACIA_BUTTON(-1,CoreUtils.Version.v1_13, new MaterialVersions(0,"WOOD_BUTTON")),
+	ACACIA_BUTTON(-1,CoreVersion.v1_13, new MaterialVersions(0,"WOOD_BUTTON")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_DOOR(196,CoreUtils.Version.v1_8_8),
+	ACACIA_DOOR(196,CoreVersion.v1_8_8),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_FENCE(192,CoreUtils.Version.v1_8_8),
+	ACACIA_FENCE(192,CoreVersion.v1_8_8),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_FENCE_GATE(187,CoreUtils.Version.v1_8_8),
+	ACACIA_FENCE_GATE(187,CoreVersion.v1_8_8),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_LEAVES(161,CoreUtils.Version.v1_8_8,new MaterialVersions(0,"LEAVES_2")),
+	ACACIA_LEAVES(161,CoreVersion.v1_8_8,new MaterialVersions(0,"LEAVES_2")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_LOG(162,CoreUtils.Version.v1_8_8,new MaterialVersions(0,"LOG_2")),
+	ACACIA_LOG(162,CoreVersion.v1_8_8,new MaterialVersions(0,"LOG_2")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_PLANKS(5,CoreUtils.Version.v1_8_8,new MaterialVersions(4,"WOOD")),
+	ACACIA_PLANKS(5,CoreVersion.v1_8_8,new MaterialVersions(4,"WOOD")),
 	/**
 	 * + 1.13
 	 */
-	ACACIA_PRESSURE_PLATE(-1,CoreUtils.Version.v1_13,new MaterialVersions(0,"WOOD_PLATE")),
+	ACACIA_PRESSURE_PLATE(-1,CoreVersion.v1_13,new MaterialVersions(0,"WOOD_PLATE")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_SAPLING(6,CoreUtils.Version.v1_8_8,new MaterialVersions(4,"SAPLING")),
+	ACACIA_SAPLING(6,CoreVersion.v1_8_8,new MaterialVersions(4,"SAPLING")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_SLAB(126,CoreUtils.Version.v1_8_8,new MaterialVersions(4,"WOOD_STEP")),
+	ACACIA_SLAB(126,CoreVersion.v1_8_8,new MaterialVersions(4,"WOOD_STEP")),
 	/**
 	 * + 1.8.8
 	 */
-	ACACIA_STAIRS(163,CoreUtils.Version.v1_8_8,new MaterialVersions(0,"ACACIA_STAIRS")),
+	ACACIA_STAIRS(163,CoreVersion.v1_8_8,new MaterialVersions(0,"ACACIA_STAIRS")),
 	/**
 	 * + 1.13
 	 */
-	ACACIA_TRAPDOOR(-1,CoreUtils.Version.v1_13,new MaterialVersions(0,"TRAP_DOOR")),
+	ACACIA_TRAPDOOR(-1,CoreVersion.v1_13,new MaterialVersions(0,"TRAP_DOOR")),
 	/**
 	 * + 1.13
 	 */
-	ACACIA_WOOD(-1,CoreUtils.Version.v1_13,new MaterialVersions(0,"LOG_2")),
+	ACACIA_WOOD(-1,CoreVersion.v1_13,new MaterialVersions(0,"LOG_2")),
 	
 	//----------------------------------------FIN ACACIA DATA--------------------------------------//
 	
 	/**
 	 * + 1.8.8
 	 */
-	ACTIVATOR_RAIL(157,CoreUtils.Version.v1_8_8),
+	ACTIVATOR_RAIL(157,CoreVersion.v1_8_8),
 	/**
 	 * + 1.8.8
 	 */
-	AIR(0,CoreUtils.Version.v1_8_8),
+	AIR(0,CoreVersion.v1_8_8),
 	
-	ALLIUM(38,CoreUtils.Version.v1_13,new MaterialVersions(0,"***LOG_2")),
+	ALLIUM(38,CoreVersion.v1_13,new MaterialVersions(0,"***LOG_2")),
 	
 	
-	PILLAGER_SPAWN_EGG(-1,CoreUtils.Version.v1_13,new MaterialVersions(0,"PRUEBA"));;
+	PILLAGER_SPAWN_EGG(-1,CoreVersion.v1_13,new MaterialVersions(0,"PRUEBA"));;
 	
 	private MaterialVersions[] legacyMaterialVersions;
 	
 	private int id;
 	
-	private Version version;
+	private CoreVersion version;
 	
 	private Material materialCache;
 	
@@ -107,13 +105,13 @@ public enum  CoreMaterial2 {
 	
 	
 	
-	private CoreMaterial2(int id,Version version) {
+	private CoreMaterial2(int id,CoreVersion version) {
 		this.id = id;
 		this.version = version;
 	}
 	
 	
-	private CoreMaterial2(int id,Version version, MaterialVersions... legacyMaterialVersions) {
+	private CoreMaterial2(int id,CoreVersion version, MaterialVersions... legacyMaterialVersions) {
 		this.id = id;
 		this.legacyMaterialVersions = legacyMaterialVersions;
 		this.version = version;
@@ -193,7 +191,7 @@ public enum  CoreMaterial2 {
 	}
 	
 	public boolean like(Material material, int data) {
-		if(CoreUtils.Version.getVersion().esMenorIgual(CoreUtils.Version.v1_12_x)) {
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_12_x)) {
 			return (this.getMaterial() == material && this.getData() == data);
 		}
 		return this.getMaterial() == material;	
