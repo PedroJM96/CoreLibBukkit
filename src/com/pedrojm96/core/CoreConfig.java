@@ -28,7 +28,7 @@ import com.google.common.io.CharStreams;
  * Facilita la creacion de configuracion en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.6 5-09-2022
+ * @version 1.7 19-09-2022
  *
  */
 public class CoreConfig {
@@ -96,6 +96,9 @@ public class CoreConfig {
 	
 	private String getInputStreamToString(InputStream dataIn) {
 		String result ="";
+		if(dataIn==null) {
+			return result;
+		}
 		try {
 			result = CharStreams.toString(new InputStreamReader(
 				     dataIn, Charset.forName("UTF-8")));
