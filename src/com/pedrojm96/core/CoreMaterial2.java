@@ -18,7 +18,12 @@ public enum  CoreMaterial2 {
 	/**
 	 * + 1.8.8
 	 */ 
-	ACACIA_DOOR (-1,"ACACIA_DOOR", "AIR");
+	ACACIA_DOOR (196,"LEGACY_ACACIA_DOOR"),
+	ACACIA_DOOR_ITEM (430,"ACACIA_DOOR","LEGACY_ACACIA_DOOR_ITEM"),
+	ACACIA_FENCE (430,"LEGACY_ACACIA_FENCE");
+	
+	
+	
 	private int id;
 
 	private String[] versionDependentNames;
@@ -38,12 +43,17 @@ public enum  CoreMaterial2 {
 	
 	public Material getMaterial(){
 		if (materialCache != null) return materialCache;
-        for (String name : versionDependentNames) {
-            try {
-                return materialCache = Material.valueOf(name);
-            } catch (IllegalArgumentException ignore2) {
-                // try next
-            }
+		try {
+            return materialCache = Material.valueOf(this.name());
+        } catch (IllegalArgumentException ignore1) {
+             // try next
+			 for (String name : versionDependentNames) {
+			     try {
+			         return materialCache = Material.valueOf(name);
+			     } catch (IllegalArgumentException ignore2) {
+			         // try next
+			     }
+			 }
         }
         throw new IllegalArgumentException("Found no valid material name for " + this.name());
 	}
