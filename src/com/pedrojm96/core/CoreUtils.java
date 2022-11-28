@@ -32,7 +32,7 @@ import com.mojang.authlib.properties.Property;
  * Utilidades para el core.
  * 
  * @author PedroJM96
- * @version 1.9 08-09-2022
+ * @version 2.0 29-10-2022
  *
  */
 public class CoreUtils {
@@ -379,38 +379,5 @@ public class CoreUtils {
     }
 	
     
-    public static Material getMaterial(String mate) {
-    		try {
-                  return Material.valueOf(mate);
-            } catch (IllegalArgumentException ignore2) {
-                // try next
-            	return Material.AIR;
-            } 
-    }
     
-    public static Material getMaterial(String... mates) {
-    	for(int i =0; i<mates.length;i++) {
-    		 String mate = mates[i].trim();
-    		 try {
-                 return Material.valueOf(mate);
-             } catch (IllegalArgumentException ignore2) {
-               // try next
-           	    continue;
-             } 
-    	}
-    	return Material.AIR;
-    }
-    
-    
-     public static boolean isMaterial(Material material,String... mates) {
-    	for(int i =0; i<mates.length;i++) {
-    		 String mate = mates[i].trim();
-    		 if(material == getMaterial(mate)) {
-     			return true;
-     		 }else {
-     			continue;
-     		 }
-    	}
-    	return false;
-    }
 }

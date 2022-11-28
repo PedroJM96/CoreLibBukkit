@@ -9,7 +9,7 @@ import org.bukkit.Material;
  * Contiene los metodos para usar los materiales que sean compatible en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
  * 
  * @author PedroJM96
- * @version 1.3 8-09-2022
+ * @version 1.4 29-10-2022
  *
  */
 public class CoreMaterial {
@@ -952,4 +952,40 @@ public class CoreMaterial {
     }
     return Material.getMaterial(idpos113.get(Integer.valueOf(id)));
   }
+  
+  
+  public static Material getMaterial(String mate) {
+		try {
+            return Material.valueOf(mate);
+      } catch (IllegalArgumentException ignore2) {
+          // try next
+      	return Material.AIR;
+      } 
+ }
+
+  public static Material getMaterial(String... mates) {
+	for(int i =0; i<mates.length;i++) {
+		 String mate = mates[i].trim();
+		 try {
+           return Material.valueOf(mate);
+       } catch (IllegalArgumentException ignore2) {
+         // try next
+     	    continue;
+       } 
+	}
+	return Material.AIR;
+ }
+
+
+ public static boolean isMaterial(Material material,String... mates) {
+	for(int i =0; i<mates.length;i++) {
+		 String mate = mates[i].trim();
+		 if(material == getMaterial(mate)) {
+			return true;
+		 }else {
+			continue;
+		 }
+	}
+	return false;
+ }
 }
