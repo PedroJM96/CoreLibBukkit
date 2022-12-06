@@ -11,9 +11,9 @@ package com.pedrojm96.core.data;
 public class CoreWHERE {
 
 	private String where = "";
-	
+	String [] args;
 	public CoreWHERE(String ...args) {
-		
+		this.args = args;
 		for (int i = 0; i<args.length;i++) {
 			if(!args[i].trim().contains(":")) {
 				continue;
@@ -34,5 +34,9 @@ public class CoreWHERE {
 	
 	public String get() {
 		return this.where.trim();
+	}
+	
+	public String[] get(int i) {
+		return args[i].trim().split(":");
 	}
 }

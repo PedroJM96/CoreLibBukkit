@@ -1,9 +1,12 @@
 package com.pedrojm96.core;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * Contiene los metodos para usar los materiales que sean compatible en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -988,4 +991,45 @@ public class CoreMaterial {
 	}
 	return false;
  }
+ 
+ 	@SuppressWarnings("deprecation")
+	public static ItemStack createItem(int amount ,String name,Material mate,int shrt) {
+		ItemStack i = new ItemStack(mate,amount,(short)shrt);
+		ItemMeta im = i.getItemMeta();
+		String n = CoreColor.colorCodes(name);
+		im.setDisplayName(n);
+		i.setItemMeta(im);
+		return i;
+	}
+ 	
+ 	@SuppressWarnings("deprecation")
+	public static ItemStack createItem(String name,Material mate,int shrt) {
+		ItemStack i = new ItemStack(mate,1,(short)shrt);
+		ItemMeta im = i.getItemMeta();
+		String n = CoreColor.colorCodes(name);
+		im.setDisplayName(n);
+		i.setItemMeta(im);
+		return i;
+	}
+ 	@SuppressWarnings("deprecation")
+	public static ItemStack createItem(String name,List<String> lore,String mate,int shrt) {
+		ItemStack i = new ItemStack(Material.getMaterial(mate),1,(short)shrt);
+		ItemMeta im = i.getItemMeta();
+		name = CoreColor.colorCodes(name);
+		im.setDisplayName(name);
+		lore = CoreColor.rColorList(lore);
+		im.setLore(lore);
+		i.setItemMeta(im);
+		return i;
+	}
+ 	@SuppressWarnings("deprecation")
+	public static ItemStack createItem(String name,List<String> lore,Material mate,int shrt) {
+		ItemStack item = new ItemStack(mate,1,(short)shrt);
+		ItemMeta itemMeta = item.getItemMeta();
+		itemMeta.setDisplayName(CoreColor.colorCodes(name));
+		itemMeta.setLore(CoreColor.rColorList(lore));
+		item.setItemMeta(itemMeta);
+		return item;
+	}
+ 
 }
