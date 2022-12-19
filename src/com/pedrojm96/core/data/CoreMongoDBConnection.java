@@ -114,7 +114,7 @@ public class CoreMongoDBConnection {
 		MongoClientURI connectionString = new MongoClientURI(uri);
 		MongoClient localClient = new MongoClient(connectionString);
 		return localClient;
-	}
+	} 
 	
 	private MongoClient getClient(String connectionString) {
 		if(client!=null){
