@@ -99,9 +99,8 @@ public class CoreVariables {
 		if(placeholderAPI){
 			try{
 				newString = PlaceholderAPI.setPlaceholders(p, newString);
-				
 			}catch (Exception var11){
-		    	
+				var11.printStackTrace();
 		    }
 		}
 		if (superstatsAPI != null)

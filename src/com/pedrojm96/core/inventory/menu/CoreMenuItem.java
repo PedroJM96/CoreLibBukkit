@@ -230,9 +230,11 @@ public class CoreMenuItem {
 		 if (this.name != null && !meta.hasDisplayName()) { 
 			 return false;
 		 } 
-		 if (!meta.getDisplayName().equals(CoreVariables.replace(this.name.replaceAll("<price>", String.valueOf(getPrice())), player))) {
+		
+		 if (!meta.getDisplayName().equalsIgnoreCase(CoreVariables.replace(this.name.replaceAll("<price>", String.valueOf(getPrice())), player))) {
 			 return false;
 		 }
+		
 		 if ((this.data != null) && (this.data.shortValue() != s.getDurability())) {
 			 return false;
 		 }
