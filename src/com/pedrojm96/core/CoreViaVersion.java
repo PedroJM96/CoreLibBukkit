@@ -14,7 +14,7 @@ import com.viaversion.viaversion.api.ViaAPI;
  * Utilidades para el plugin ViaVersion.
  * 
  * @author PedroJM96
- * @version 1.5 05-09-2022
+ * @version 1.6 08-06-2023
  *
  */
 public class CoreViaVersion {
@@ -222,6 +222,9 @@ public class CoreViaVersion {
 	    	break;
 	    case "1.19.4":
 	    	retorno = 762;
+	    	break;
+	    case "1.20":
+	    	retorno = 763;
 	    	break;
 	    default:
 	    	retorno = 0;

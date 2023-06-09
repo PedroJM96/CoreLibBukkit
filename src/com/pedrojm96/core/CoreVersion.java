@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
  * Para administrar las versiones del servidor.
  * 
  * @author PedroJM96
- * @version 1.9 08-09-2022
+ * @version 2.0 08-06-2023
  *
  */
 public enum CoreVersion {
@@ -69,6 +69,8 @@ public enum CoreVersion {
 		v1_19_3(11903),
 		v1_19_4(11904),
 		v1_19_x(11910),
+		v1_20(12000),
+		v1_20_x(12010),
 		vUnsupported(1000000);
 		
 		private int value;
