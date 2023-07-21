@@ -144,6 +144,27 @@ public class CoreReflection {
 	    }
 	}
 	
+	/**
+	 *  Envia un paquete al jugador indigado.
+	 *  
+	 * @param player El jugador al que se le va a enviar el paquete.
+	 * @param packet El paquete que se va a enviar.
+	 */
+	public static void sendPacketPos_1_20(Player player, Object packet)
+	{
+	    try
+	    {
+	      Object handle = player.getClass().getMethod("getHandle").invoke(player);
+	      Object playerConnection = handle.getClass().getField("c").get(handle);
+	      playerConnection.getClass().getMethod("a", getClass("net.minecraft.network.protocol.Packet")).invoke(playerConnection, packet );
+	    }
+	    catch (Exception e)
+	    {
+	    	System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
+	    	e.printStackTrace();
+	    }
+	}
+	
 	
 	public static Object  getStaticField(Class<?> c, String name){
 		Object retorno = null;

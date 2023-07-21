@@ -82,10 +82,31 @@ public class CoreActionBar {
 			sendPos_1_18_Pre_1_19(player,CoreColor.colorCodes(message));
 		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_19) ){
 			sendPos_1_19_Pre_1_19_2(player,CoreColor.colorCodes(message));
-		}else {
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_19_4) ){
 			sendPos_1_19_2(player,CoreColor.colorCodes(message));
+		}else {
+			sendPos_1_20(player,CoreColor.colorCodes(message));
 		}
 		
+	}
+	
+	
+	
+	private static void sendPos_1_20(Player player, String message)
+	{
+	    try
+	    {
+	    	Class<?> chatClass = CoreReflection.getClass("net.minecraft.network.chat.IChatBaseComponent");
+	    	Object ationmesage = chatClass.getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\":\"" + message + "\"}" );
+	    	Constructor<?> constructor = CoreReflection.getClass("net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket").getConstructor(chatClass);
+	    	Object packet = constructor.newInstance(ationmesage);
+	    	CoreReflection.sendPacketPos_1_20(player, packet);
+	    }
+	    catch (Exception var11)
+	    {
+	      System.out.println("Please report the bug at: https://github.com/PedroJM96/CoreLibBukkit");
+	      var11.printStackTrace();
+	    }
 	}
 	
 	private static void sendPos_1_18_Pre_1_19(Player player, String message)
