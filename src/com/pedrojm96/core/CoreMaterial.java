@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -997,8 +998,11 @@ public class CoreMaterial {
 		ItemStack i = new ItemStack(mate,amount,(short)shrt);
 		ItemMeta im = i.getItemMeta();
 		String n = CoreColor.colorCodes(name);
-		im.setDisplayName(n);
-		i.setItemMeta(im);
+		if(im!=null) {
+			im.setDisplayName(n);
+			i.setItemMeta(im);
+		}
+		
 		return i;
 	}
  	

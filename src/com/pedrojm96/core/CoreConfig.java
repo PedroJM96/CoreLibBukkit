@@ -314,6 +314,10 @@ public class CoreConfig {
 		 config.set(path, value);
 	}
 	
+	public void set(String path,long value){
+		 config.set(path, value);
+	}
+	
 	public void set(String path, List<String> value) {
 		config.set(path, value);
 	}
