@@ -71,6 +71,7 @@ public enum CoreVersion {
 		v1_19_x(11910),
 		v1_20(12000),
 		v1_20_1(12001),
+		v1_20_2(12002),
 		v1_20_x(12010),
 		vUnsupported(1000000);
 		
