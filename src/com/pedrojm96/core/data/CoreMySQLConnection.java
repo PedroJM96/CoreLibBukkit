@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import com.pedrojm96.core.CoreLog;
 import com.pedrojm96.core.CorePlugin;
+import com.pedrojm96.core.CoreVersion;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -48,8 +49,13 @@ public class CoreMySQLConnection {
 		this.useSSL = useSSL;
 		HikariConfig config = new HikariConfig();
 		config.setPoolName(plugin.getInstance().getName()+"-MySQLPool");
-		config.setJdbcUrl("jdbc:mysql://"+this.host+":"+this.port+"/"+this.database+"?useSSL="+(this.useSSL?"true":"false")  );
-		config.setDriverClassName("com.mysql.jdbc.Driver");
+		config.setJdbcUrl("jdbc:mysql://"+this.host+":"+this.port+"/"+this.database+"?useSSL="+(this.useSSL?"true":"false")  );	
+		if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_17_x)) {
+			config.setDriverClassName("com.mysql.jdbc.Driver");  
+		}else { 
+			 config.setDriverClassName("com.mysql.cj.jdbc.Driver");	 
+		}
+		
 		config.setUsername(this.username);
 		config.setPassword(this.password);
 		config.setMaxLifetime(180000L);
