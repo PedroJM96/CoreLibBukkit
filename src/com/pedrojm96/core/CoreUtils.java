@@ -378,6 +378,67 @@ public class CoreUtils {
         return id;
     }
 	
-    
+    public void setItemInHand(ItemStack item, Player player) {
+		if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_9)) {
+			this.setItemInHand_1_9(item,player);
+		}else {
+			this.setItemInHand_1_8(item,player);
+		}
+	}
+	
+	
+	public ItemStack getItemInHand(Player player) {
+		if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_9)) {
+			return this.getItemInHand_1_9(player);
+		}else {
+			return this.getItemInHand_1_8(player);
+		}
+	}
+	
+	public void setItemInHand_1_8(ItemStack item,Player player) {
+		
+		try {
+			 player.getInventory().getClass().getMethod("setItemInHand",item.getClass()).invoke(player.getInventory(),item);
+		
+		} catch (Exception e)
+	    {
+		      e.printStackTrace();
+		}	
+	}
+
+	public void setItemInHand_1_9(ItemStack item,Player player) {
+		
+		try {
+			player.getInventory().getClass().getMethod("setItemInMainHand",item.getClass()).invoke(player.getInventory(),item);
+		} catch (Exception e)
+	    {
+		      e.printStackTrace();
+		}	
+	}
+	
+	
+	public ItemStack getItemInHand_1_8(Player player) {
+		
+		try {
+			Object item = player.getInventory().getClass().getMethod("getItemInHand").invoke(player.getInventory());
+			return (ItemStack) item;
+		} catch (Exception e)
+	    {
+		      e.printStackTrace();
+		}
+		return null;	
+	}
+	
+	public ItemStack getItemInHand_1_9(Player player) {
+		
+		try {
+			Object item = player.getInventory().getClass().getMethod("getItemInMainHand").invoke(player.getInventory());
+			return (ItemStack) item;
+		} catch (Exception e)
+	    {
+		      e.printStackTrace();
+		}
+		return null;	
+	}
     
 }
