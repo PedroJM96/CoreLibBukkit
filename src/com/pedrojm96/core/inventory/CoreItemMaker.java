@@ -123,7 +123,7 @@ public class CoreItemMaker {
 	private void URL(SkullMeta skullMeta) {
 		 String localString = this.skull;
 		 String url = localString.split("url:")[1].trim();
-		 GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+		 GameProfile profile = new GameProfile(UUID.randomUUID(), "");
 		 byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
 		 profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
 		 Field profileField = null;
@@ -139,7 +139,7 @@ public class CoreItemMaker {
 	private void TEXTURES(SkullMeta skullMeta) {
 		 String localString = this.skull;
 		 String textures = localString.split("textures:")[1].trim();
-		 GameProfile profile = new GameProfile(UUID.randomUUID(), null); 
+		 GameProfile profile = new GameProfile(UUID.randomUUID(), ""); 
 		 profile.getProperties().put("textures", new Property("textures", new String(textures)));
 		 Field profileField = null;
 		 try {
