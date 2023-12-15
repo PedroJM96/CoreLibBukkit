@@ -2,6 +2,7 @@ package com.pedrojm96.core;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class CoreUtils {
 			profile = (GameProfile) strClass.cast(playerBukkit).getClass().getMethod("getProfile").invoke(strClass.cast(playerBukkit));
 				//(GameProfile) handle.getClass().getMethod("getProfile").invoke(handle);	
 			Property colle = profile.getProperties().get("textures").iterator().next();
-			String texture = colle.getValue();	
+			String texture = getPropertyValue(colle);	
 			String signature = colle.getSignature();
 			a = new String[] {texture, signature};
 			log.debug("Textura obtenida localmente para: "+playerBukkit.getName());
@@ -56,6 +57,28 @@ public class CoreUtils {
 		}
 		return a;
 	}
+	
+	public static String getPropertyValue(Property property) {
+		
+		if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_20_2)) {
+			try {
+				Object value = property.getClass().getMethod("value").invoke(property);
+				return (String) value;
+				
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
+					| SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
+		}else {
+			return property.getValue();
+		}
+		
+		 
+	}
+	
+	
 	
 	@SuppressWarnings("deprecation")
 	public static String[] getTextureFromMojang(String name,CoreLog log) {
