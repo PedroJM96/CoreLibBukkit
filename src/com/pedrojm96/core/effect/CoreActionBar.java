@@ -14,6 +14,9 @@ import com.pedrojm96.core.CoreColor;
 import com.pedrojm96.core.CoreReflection;
 import com.pedrojm96.core.CoreVersion;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+
 
 /**
  * Contiene los metodos para enviar mensajes ActionBar a los jugadores en multiples versiones en el servidor de minecraft implementando la api de bukkt/spigot.
@@ -84,12 +87,18 @@ public class CoreActionBar {
 			sendPos_1_19_Pre_1_19_2(player,CoreColor.colorCodes(message));
 		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_19_4) ){
 			sendPos_1_19_2(player,CoreColor.colorCodes(message));
-		}else {
+		}else if(CoreVersion.getVersion().esMenorIgual(CoreVersion.v1_20_2) ){
 			sendPos_1_20(player,CoreColor.colorCodes(message));
+		}else {
+			sendPos_1_20_2(player,CoreColor.colorCodes(message));
 		}
 		
 	}
-	
+	private static void sendPos_1_20_2(Player player, String message)
+	{
+		 TextComponent component = new TextComponent(CoreColor.clearColor(message));
+		 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, component);
+	}
 	
 	
 	private static void sendPos_1_20(Player player, String message)
