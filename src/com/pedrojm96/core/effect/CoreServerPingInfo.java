@@ -32,6 +32,7 @@ import com.pedrojm96.core.CoreVersion;
  * @version 1.3 05-10-2022
  *
  */
+
 public class CoreServerPingInfo {
 
 	private static final VarHandle MODIFIERS;
