@@ -15,6 +15,7 @@ import com.pedrojm96.core.CoreReflection;
 import com.pedrojm96.core.CoreVersion;
 
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 
@@ -96,7 +97,8 @@ public class CoreActionBar {
 	}
 	private static void sendPos_1_20_2(Player player, String message)
 	{
-		 TextComponent component = new TextComponent(CoreColor.clearColor(message));
+		 BaseComponent[] component = TextComponent.fromLegacyText(CoreColor.colorCodes(message));
+
 		 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, component);
 	}
 	
