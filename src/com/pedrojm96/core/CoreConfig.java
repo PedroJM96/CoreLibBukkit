@@ -25,7 +25,7 @@ import com.google.common.io.CharStreams;
 
 
 /**
- * Facilita la creacion de configuracion en el servidor de minecraft implementando la api de bukkt/spigot.
+ * Facilita la creacion de configuracion en el servidor de minecraft implementando la api de bukkt/spigot. 
  * 
  * @author PedroJM96
  * @version 1.7 19-09-2022
