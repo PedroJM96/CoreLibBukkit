@@ -1,12 +1,8 @@
 package com.pedrojm96.core.effect;
 
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodHandles.Lookup;
-import java.lang.invoke.VarHandle;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.UUID;
 
@@ -35,16 +31,14 @@ import com.pedrojm96.core.CoreVersion;
 
 public class CoreServerPingInfo {
 
-	private static final VarHandle MODIFIERS;
-
-	  static {
-	    try {
-	      Lookup lookup = MethodHandles.privateLookupIn(Field.class, MethodHandles.lookup());
-	      MODIFIERS = lookup.findVarHandle(Field.class, "modifiers", int.class);
-	    } catch (IllegalAccessException | NoSuchFieldException ex) {
-	      throw new RuntimeException(ex);
-	    }
-	  }
+	/*
+	 * private static final VarHandle MODIFIERS;
+	 * 
+	 * static { try { Lookup lookup = MethodHandles.privateLookupIn(Field.class,
+	 * MethodHandles.lookup()); MODIFIERS = lookup.findVarHandle(Field.class,
+	 * "modifiers", int.class); } catch (IllegalAccessException |
+	 * NoSuchFieldException ex) { throw new RuntimeException(ex); } }
+	 */
 	
 	
 	public static class PingMotd{
@@ -312,7 +306,7 @@ public class CoreServerPingInfo {
             e.printStackTrace();
         }
 		// make field non-final
-	    MODIFIERS.set(field, field.getModifiers() & ~Modifier.FINAL);
+	    //MODIFIERS.set(field, field.getModifiers() & ~Modifier.FINAL);
 	    // set field to new value
 	    field.setAccessible(true);
 	    
@@ -339,7 +333,7 @@ public class CoreServerPingInfo {
             throw new IllegalArgumentException("Error while getting the field '" + name + "'");
         }
         // make field non-final
-	    MODIFIERS.set(field, field.getModifiers() & ~Modifier.FINAL);
+	    //MODIFIERS.set(field, field.getModifiers() & ~Modifier.FINAL);
 	    // set field to new value
 	    field.setAccessible(true);
 	    try {
