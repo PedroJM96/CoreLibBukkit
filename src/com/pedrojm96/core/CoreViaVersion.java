@@ -247,6 +247,9 @@ public class CoreViaVersion {
 	    case "1.21":
 	    	retorno = 767;
 	    	break;
+	    case "1.21.1":
+	    	retorno = 767;
+	    	break;
 	    default:
 	    	retorno = 0;
 	    	break;
