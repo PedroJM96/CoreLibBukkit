@@ -1,10 +1,13 @@
 package com.pedrojm96.core;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryEvent;
 
 /**
  * Contiene los metodos estaticos para acceder y manejar  la reflesion de clases de minecraft.net y craftbukkit.
@@ -299,4 +302,24 @@ public class CoreReflection {
 	    }
 	    return null;
 	  }	 	 
+	 
+	 /**
+	 * In API versions 1.20.6 and earlier, InventoryView is a class.
+	 * In versions 1.21 and later, it is an interface.
+	 * This method uses reflection to get the title Inventory object from the
+	 * InventoryView associated with an InventoryEvent, to avoid runtime errors.
+	 * @param event The generic InventoryEvent with an InventoryView to inspect.
+	 * @return The title of Inventory object from the event's InventoryView.
+	 */
+	 public static String getTitleInventory(InventoryEvent event) {
+	     try {
+	         Object view = event.getView();
+	         Method getTitle = view.getClass().getMethod("getTitle");
+	         getTitle.setAccessible(true);
+	         return (String) getTitle.invoke(view);
+	     } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+	         throw new RuntimeException(e);
+	     }
+	 }
+	 
 }

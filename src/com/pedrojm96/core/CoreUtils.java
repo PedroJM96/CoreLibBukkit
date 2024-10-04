@@ -18,6 +18,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -463,5 +464,22 @@ public class CoreUtils {
 		}
 		return null;	
 	}
+	
+	 public static String getTitleInventory_1_21(InventoryEvent event) {
+		 return CoreReflection.getTitleInventory(event);
+	 }
+	 
+	 public static String getTitleInventory_1_20_6(InventoryEvent event) {
+		 return event.getView().getTitle();
+	 }
+	
+
+	 public static String getTitleInventory(InventoryEvent event) {
+		if(CoreVersion.getVersion().esMayorIgual(CoreVersion.v1_21)) {
+			return getTitleInventory_1_21(event);
+		}else {
+			return getTitleInventory_1_20_6(event);
+		}
+	 }
     
 }
