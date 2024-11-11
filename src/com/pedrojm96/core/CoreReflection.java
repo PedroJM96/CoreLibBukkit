@@ -6,8 +6,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.potion.PotionEffectType;
 
 /**
  * Contiene los metodos estaticos para acceder y manejar  la reflesion de clases de minecraft.net y craftbukkit.
@@ -322,4 +324,28 @@ public class CoreReflection {
 	     }
 	 }
 	 
+	 
+	 public static PotionEffectType getPotionEffect(String name) {
+		Class<?> clase = CoreReflection.getBukkitClass("potion.PotionEffectType");
+		PotionEffectType type = (PotionEffectType) CoreReflection.getStaticField(clase, name);
+		return type;
+		 
+	 }
+	 
+	 public static EntityType getEntityType(String name) {
+			Class<?> clase = CoreReflection.getBukkitClass("entity.EntityType");
+			EntityType type = (EntityType) CoreReflection.getEnumField(clase, name);
+			return type;	 
+	 }
+	 
+	 public static Object getEnumField(Class<?> clase , String name) {
+		    Object enumfield = null;
+			try {
+				enumfield = clase.getField(name).get(null);
+			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		    return enumfield;	 
+	 }
 }
