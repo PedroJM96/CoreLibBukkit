@@ -238,6 +238,9 @@ public class CoreMenu {
 			}catch(Exception ex){
 				this.sound = null;
 			}
+			catch(IncompatibleClassChangeError ex){
+				this.sound = null;
+			}
 		}
 	}
 	
