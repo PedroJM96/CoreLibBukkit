@@ -214,18 +214,30 @@ public enum CoreSound {
 	}
 	
 	public Sound load(){
+		boolean IncompatibleClassChangeError = false;
 		if (cached != null) return cached;
         for (String name : versionDependentNames) {
             try {
-                return cached = org.bukkit.Sound.valueOf(name);
-            } catch (IllegalArgumentException ignore2) {
+                return cached = Sound.valueOf(name);
+            }catch (IllegalArgumentException ignore2) {
                 // try next
+            }catch (IncompatibleClassChangeError ignore3) {
+                // try next
+            	IncompatibleClassChangeError = true;
             }
+        }
+        if(IncompatibleClassChangeError) {
+        	throw new IncompatibleClassChangeError("Found system no compatible for 1.21.8 ");
         }
         throw new IllegalArgumentException("Found no valid sound name for " + this.name());
 	}
 	
 	public void play(Player player){
-		player.playSound(player.getLocation(), load(), 1.0F, 1.0F);	
+		try {
+			player.playSound(player.getLocation(), load(), 1.0F, 1.0F);
+		}catch (IncompatibleClassChangeError ignore3) {
+            // try next
+        }
+			
 	}
 }
